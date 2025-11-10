@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Quicksand:wght@300..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #833ab4;
+  --color-secondary: #fd1d1d;
+  --color-tertiary: #fcaf45;
+  --color-fourth: #5851db;
+  --color-dark: #101010;
+  --color-off-white: #f0f0f0;
+
+  --font-primary: "Quicksand", sans-serif;
+  --font-secondary: "Roboto Mono", monospace;
+  --font-tertiary: "Grand Hotel", cursive;
+}
