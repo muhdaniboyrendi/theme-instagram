@@ -7,9 +7,9 @@ const openInvitation = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[url(/placeholder.jpg)] bg-cover bg-center">
+  <div class="min-h-dvh bg-[url(/placeholder.jpg)] bg-cover bg-center">
     <div
-      class="min-h-screen flex flex-wrap justify-center content-around bg-dark/85 backdrop-blur-md"
+      class="min-h-dvh flex flex-wrap justify-center content-around bg-dark/85 backdrop-blur-md"
     >
       <!-- Header and Title -->
       <div class="w-full">

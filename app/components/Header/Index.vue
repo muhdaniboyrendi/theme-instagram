@@ -19,7 +19,7 @@ const likeClicked = () => {
 </script>
 
 <template>
-  <div class="w-full flex flex-wrap justify-center py-5">
+  <div class="w-full flex flex-wrap justify-center pt-5 pb-2">
     <div class="w-full px-4 flex justify-between items-center mb-5">
       <div
         v-gsap.whenVisible.slower-10.once.from="{

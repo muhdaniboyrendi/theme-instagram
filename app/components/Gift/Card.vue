@@ -54,7 +54,7 @@ const formattedNumber = computed(() => formatAccountNumber(props.number));
 <template>
   <div
     v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, scale: 0 }"
-    class="min-w-90 w-full max-w-md snap-center bg-dark rounded-xl border border-white/30 p-4"
+    class="min-w-90 w-full max-w-sm snap-center bg-dark rounded-xl border border-white/30 p-4"
   >
     <div class="w-full flex justify-between items-center mb-3">
       <div class="flex items-center gap-x-3">

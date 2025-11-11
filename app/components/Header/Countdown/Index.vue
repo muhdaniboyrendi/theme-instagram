@@ -58,7 +58,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="flex gap-x-2">
+  <div class="flex gap-x-3">
     <LazyHeaderCountdownTimeBox :time="formatDigit(days)" text="Hari" />
     <LazyHeaderCountdownTimeBox :time="formatDigit(hours)" text="Jam" />
     <LazyHeaderCountdownTimeBox :time="formatDigit(minutes)" text="Menit" />
