@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <section class="w-full">
+  <section class="w-full pb-20">
     <div class="w-full p-3">
       <div
         class="w-full py-2 px-4 rounded-xl bg-zinc-800 flex items-center gap-4 mb-2"

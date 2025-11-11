@@ -4,6 +4,9 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  activePage: {
+    typr: String,
+  },
 });
 
 const emit = defineEmits(["navigate"]);
@@ -31,24 +34,28 @@ const handleNavigate = (path) => {
               path="home"
               icon="bi-house-door"
               text="Home"
+              :active-page="activePage"
             />
             <NavbarNavLink
               @navigate="handleNavigate"
               path="gallery"
               icon="bi-search"
               text="Gallery"
+              :active-page="activePage"
             />
             <NavbarNavLink
               @navigate="handleNavigate"
-              path="plus"
+              path="comment"
               icon="bi-plus-square"
-              text="Create"
+              text="Comment"
+              :active-page="activePage"
             />
             <NavbarNavLink
               @navigate="handleNavigate"
               path="story"
               icon="bi-film"
               text="Story"
+              :active-page="activePage"
             />
             <div
               class="h-8 w-8 mx-auto aspect-square rounded-full border border-slate-700 overflow-hidden"

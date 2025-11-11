@@ -3,6 +3,7 @@ const props = defineProps({
   path: String,
   icon: String,
   text: String,
+  activePage: String,
 });
 
 const emit = defineEmits(["navigate"]);
@@ -17,17 +18,13 @@ const emit = defineEmits(["navigate"]);
     class="w-full max-w-20 mx-auto cursor-pointer group"
   >
     <i
-      class="bi text-2xl group-hover:bg-linear-to-br/oklch group-hover:from-primary group-hover:via-secondary group-hover:to-tertiary group-hover:bg-clip-text group-hover:text-transparent transition text-white"
-      :class="props.icon"
-    ></i>
-    <!-- <i
-      class="bi text-xl group-hover:bg-linear-to-br/oklch group-hover:from-primary group-hover:via-secondary group-hover:to-tertiary group-hover:bg-clip-text group-hover:text-transparent transition"
+      class="bi text-2xl group-hover:bg-linear-to-br/oklch group-hover:from-primary group-hover:via-secondary group-hover:to-tertiary group-hover:bg-clip-text group-hover:text-transparent transition"
       :class="[
         props.icon,
-        activeSection === props.href
+        props.activePage === props.path
           ? 'bg-linear-to-br/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent'
           : 'text-white',
       ]"
-    ></i> -->
+    ></i>
   </button>
 </template>

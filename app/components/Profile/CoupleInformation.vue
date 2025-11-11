@@ -11,6 +11,16 @@ const props = defineProps([
   "followers",
   "following",
 ]);
+
+const isProfilePhotoOpen = ref(false);
+
+const openPhoto = () => {
+  isProfilePhotoOpen.value = true;
+};
+
+const closePhoto = () => {
+  isProfilePhotoOpen.value = false;
+};
 </script>
 
 <template>
@@ -33,18 +43,19 @@ const props = defineProps([
         class="w-fit px-2"
       >
         <NuxtImg
+          @click="openPhoto"
           :src="props.image"
           widht="50"
           quality="50"
           loading="lazy"
           placeholder
-          class="w-30 aspect-square object-cover rounded-full"
+          class="w-30 aspect-square object-cover rounded-full cursor-pointer hover:opacity-80 transition-opacity"
           alt="Profile Image"
         />
       </div>
       <div class="w-full">
         <div class="w-full flex justify-between items-center">
-          <p class="mb-2 text-sm font-semibold">Lorem Ipsum Dolor Sit Amet</p>
+          <p class="mb-2 text-sm font-bold">Lorem Ipsum Dolor Sit Amet</p>
           <span class="text-zinc-400 text-xs">he/him</span>
         </div>
         <div class="w-full grid grid-cols-3">
@@ -76,27 +87,99 @@ const props = defineProps([
       v-gsap.once.slower-10.delay-1500.from="{ opacity: 0, x: -30 }"
       class="w-full px-3 mb-4"
     >
-      <p class="font-semibold">{{ props.name }}</p>
+      <p class="text-sm font-bold">{{ props.name }}</p>
       <p class="text-sm">{{ props.child }}</p>
       <p class="text-sm">{{ props.parent }}</p>
     </div>
     <div class="flex justify-stretch items-center gap-x-2 px-3">
       <div
         v-gsap.once.slower-10.delay-2000.from="{ opacity: 0, scale: 0 }"
-        class="w-full text-center text-sm border-2 border-white rounded-lg hover:border-fourth hover:text-fourth"
+        class="w-full"
       >
-        <a :href="props.socialLink" target="_blank" class="w-full py-1 block"
+        <a
+          :href="props.socialLink"
+          target="_blank"
+          class="w-full py-2 block font-semibold text-center text-sm bg-zinc-800 hover:bg-zinc-700 rounded-lg transition duration"
           >Instagram</a
         >
       </div>
       <div
         v-gsap.once.slower-10.delay-2000.from="{ opacity: 0, scale: 0 }"
-        class="w-full text-center text-sm border-2 border-white rounded-lg hover:border-fourth hover:text-fourth"
+        class="w-full"
       >
-        <a :href="props.socialLink" target="_blank" class="w-full py-1 block">{{
-          props.social
-        }}</a>
+        <a
+          :href="props.socialLink"
+          target="_blank"
+          class="w-full py-2 block font-semibold text-center text-sm bg-zinc-800 hover:bg-zinc-700 rounded-lg transition duration"
+          >{{ props.social }}</a
+        >
       </div>
     </div>
+
+    <!-- Modal Foto Profil -->
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition-opacity duration-300"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-opacity duration-300"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="isProfilePhotoOpen"
+          @click="closePhoto"
+          class="fixed inset-0 top-0 left-0 w-screen h-dvh z-50 bg-dark/5 backdrop-blur-lg flex justify-center items-center px-6 cursor-pointer"
+        >
+          <!-- Container Foto -->
+          <div @click.stop class="relative">
+            <div
+              class="max-h-70 md:max-h-80 aspect-square rounded-full overflow-hidden shadow-2xl"
+            >
+              <NuxtImg
+                :src="props.image"
+                quality="90"
+                loading="lazy"
+                class="w-full object-cover"
+                alt="Profile Photo"
+              />
+            </div>
+          </div>
+
+          <div
+            class="absolute bottom-10 md:bottom-5 w-full p-6 flex justify-center items-center gap-6"
+          >
+            <div class="flex flex-col justify-center gap-3">
+              <div
+                class="w-13 h-13 aspect-square rounded-full bg-dark border border-zinc-800 flex justify-center items-center"
+              >
+                <i class="bi bi-send text-white text-xl"></i>
+              </div>
+            </div>
+            <div class="flex flex-col justify-center gap-3">
+              <div
+                class="w-13 h-13 aspect-square rounded-full bg-dark border border-zinc-800 flex justify-center items-center"
+              >
+                <i class="bi bi-people text-white text-xl"></i>
+              </div>
+            </div>
+            <div class="flex flex-col justify-center gap-3">
+              <div
+                class="w-13 h-13 aspect-square rounded-full bg-dark border border-zinc-800 flex justify-center items-center"
+              >
+                <i class="bi bi-link-45deg text-white text-xl"></i>
+              </div>
+            </div>
+            <div class="flex flex-col justify-center gap-3">
+              <div
+                class="w-13 h-13 aspect-square rounded-full bg-dark border border-zinc-800 flex justify-center items-center"
+              >
+                <i class="bi bi-qr-code-scan text-white text-xl"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>

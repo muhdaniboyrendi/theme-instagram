@@ -72,7 +72,7 @@ const handleInvitationOpen = () => {
 
   setTimeout(() => {
     isIvitationOpened.value = true;
-  }, 500);
+  }, 800);
 };
 
 const handleScroll = () => {
@@ -157,8 +157,12 @@ onUnmounted(() => {
         <Gallery />
       </div>
 
+      <div v-if="activePage === 'comment'">
+        <Story />
+      </div>
+
       <div v-if="activePage === 'story'">
-        <!-- Konten Story -->
+        <Story />
       </div>
 
       <div v-if="activePage === 'profile'">
