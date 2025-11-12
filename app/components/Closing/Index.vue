@@ -11,7 +11,7 @@ const likeClicked = () => {
   <div class="w-full max-w-4xl mx-auto">
     <div class="w-full p-5 my-5 bg-zinc-800/70 flex justify-center">
       <div
-        v-gsap.whenVisible.once.slower-10.form="{ opacity: 0, scale: 0 }"
+        v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, scale: 0 }"
         class="w-full max-w-sm p-4 bg-dark rounded-xl border border-white/30"
       >
         <div class="w-full flex justify-between items-center mb-3">

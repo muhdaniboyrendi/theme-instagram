@@ -8,10 +8,13 @@ export default defineNuxtConfig({
     "./app/assets/css/main.css",
     "bootstrap-icons/font/bootstrap-icons.css",
   ],
-
   vite: {
     plugins: [tailwindcss()],
   },
-
   modules: ["v-gsap-nuxt", "@pinia/nuxt", "@nuxtjs/color-mode", "@nuxt/image"],
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: process.env.API_BASE_URL || "http://127.0.0.1:8000/api",
+    },
+  },
 });

@@ -23,7 +23,7 @@ const handleNavigate = (path) => {
     <Transition name="slide-up">
       <nav
         v-show="show"
-        class="w-full bg-dark/80 backdrop-blur-xl text-white text-center fixed bottom-0 z-20 border-t border-zinc-900"
+        class="w-full bg-dark/80 backdrop-blur-xl text-white text-center fixed bottom-0 z-20 border-t border-zinc-800"
       >
         <div class="max-w-4xl mx-auto">
           <div

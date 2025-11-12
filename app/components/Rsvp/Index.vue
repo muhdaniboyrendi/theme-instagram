@@ -55,7 +55,7 @@ const updateAttendanceStatus = (value) => {
       "
     />
     <form
-      v-gsap.whenVisible.once.slower-10.form="{ opacity: 0 }"
+      v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, scale: 0 }"
       @submit.prevent="handleAttendanceConfirmation"
       class="w-full max-w-md mx-auto px-4 flex flex-col justify-center items-center"
     >

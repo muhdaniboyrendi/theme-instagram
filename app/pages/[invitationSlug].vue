@@ -1,4 +1,16 @@
 <script setup>
+// const { checkGuest } = useGuestStore();
+const { fetchInvitationData } = useInvitationStore();
+const route = useRoute();
+
+const invitationSlug = route.params.invitationSlug;
+const guest = route.query.quest || null;
+
+const pending = ref(true);
+const invitationData = ref(null);
+const ispreview = ref(false);
+const isWithGuest = ref(false);
+
 const isIvitationOpened = ref(false);
 const showNavbar = ref(false);
 const isFullscreen = ref(false);
@@ -95,7 +107,49 @@ const handleNavigate = (path) => {
   }
 };
 
+const loadInvitationData = async () => {
+  try {
+    const response = await fetchInvitationData(invitationSlug);
+
+    console.log(response);
+    invitationData.value = response;
+  } catch (error) {
+    console.error("Error loading invitation data:", error);
+  }
+};
+
+const checkGuest = async () => {
+  if (!guest) {
+    guestListed.value = true;
+    return;
+  } else {
+    if (invitationData.value.guests.filter((gst) => gst.slug == guest)) {
+      //
+    }
+  }
+};
+
+const initializeData = async () => {
+  pending.value = true;
+
+  try {
+    await loadInvitationData();
+    await checkGuest();
+  } catch (error) {
+    console.error("Error initializing data:", error);
+  } finally {
+    pending.value = false;
+  }
+};
+
 onMounted(() => {
+  if (invitationSlug.value == "instagram") {
+    ispreview.value = true;
+  } else {
+    ispreview.value = false;
+    initializeData();
+  }
+
   window.addEventListener("scroll", handleScroll);
 });
 
@@ -105,8 +159,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="overflow-hidden">
-    <Welcome v-if="!isIvitationOpened" @open="handleInvitationOpen" />
+  <LoadingPage v-if="pending" />
+
+  <div v-else class="overflow-hidden">
+    <Welcome
+      v-if="!isIvitationOpened"
+      @open="handleInvitationOpen"
+      :is-preview="ispreview"
+      :invitation-data="invitationData"
+    />
 
     <div
       v-if="isIvitationOpened"
@@ -137,31 +198,31 @@ onUnmounted(() => {
       />
 
       <div v-if="activePage === 'home'">
-        <Hero />
-        <Header />
-        <Quote />
-        <Greetings />
-        <Location />
-        <Gift />
-        <Rsvp />
-        <Closing />
-        <Footer />
+        <Hero :is-preview="ispreview" :invitation-data="invitationData" />
+        <Header :is-preview="ispreview" :invitation-data="invitationData" />
+        <Quote :is-preview="ispreview" :invitation-data="invitationData" />
+        <Greetings :is-preview="ispreview" :invitation-data="invitationData" />
+        <Location :is-preview="ispreview" :invitation-data="invitationData" />
+        <Gift :is-preview="ispreview" :invitation-data="invitationData" />
+        <Rsvp :is-preview="ispreview" :invitation-data="invitationData" />
+        <Closing :is-preview="ispreview" :invitation-data="invitationData" />
+        <Footer :is-preview="ispreview" :invitation-data="invitationData" />
       </div>
 
       <div v-if="activePage === 'gallery'">
-        <Gallery />
+        <Gallery :is-preview="ispreview" :invitation-data="invitationData" />
       </div>
 
       <div v-if="activePage === 'comment'">
-        <Comment />
+        <Comment :is-preview="ispreview" :invitation-data="invitationData" />
       </div>
 
       <div v-if="activePage === 'story'">
-        <Story />
+        <Story :is-preview="ispreview" :invitation-data="invitationData" />
       </div>
 
       <div v-if="activePage === 'profile'">
-        <Profile />
+        <Profile :is-preview="ispreview" :invitation-data="invitationData" />
       </div>
     </div>
   </div>
