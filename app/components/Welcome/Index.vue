@@ -1,13 +1,39 @@
 <script setup>
+const props = defineProps([
+  "isPreview",
+  "isWithGuest",
+  "guestSlug",
+  "invitationData",
+]);
 const emit = defineEmits(["open"]);
 
 const openInvitation = () => {
   emit("open");
 };
+
+const backgroundStyle = computed(() => ({
+  backgroundImage: props.isPreview
+    ? "url(/placeholder.jpg)"
+    : `url(${
+        props.invitationData?.main_info?.main_photo_url || "/placeholder.jpg"
+      })`,
+}));
+
+const guestName = computed(() => {
+  if (!props.guestSlug) {
+    return "Tamu Undangan";
+  }
+
+  const guest = props.invitationData?.guests?.find(
+    (g) => g.slug === props.guestSlug
+  );
+
+  return guest?.name || "Tamu Undangan";
+});
 </script>
 
 <template>
-  <div class="min-h-dvh bg-[url(/placeholder.jpg)] bg-cover bg-center">
+  <div class="min-h-dvh bg-cover bg-center" :style="backgroundStyle">
     <div
       class="min-h-dvh py-10 flex flex-wrap justify-center content-around bg-dark/85 backdrop-blur-md"
     >
@@ -16,9 +42,17 @@ const openInvitation = () => {
         <h1 class="text-center flex flex-col gap-6">
           <span v-gsap.animateText class="text-slate-300">The Wedding of</span>
           <span
+            v-if="props.isPreview"
             v-gsap.animateText.delay-700.slow
             class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
             >Adam & Hawa</span
+          >
+          <span
+            v-else
+            v-gsap.animateText.delay-700.slow
+            class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+            >{{ props.invitationData.groom_name }} &
+            {{ props.invitationData.bride_name }}</span
           >
         </h1>
       </div>
@@ -32,19 +66,22 @@ const openInvitation = () => {
           }"
           class="h-50 w-50 aspect-square mx-auto rounded-[3rem] bg-linear-to-br/oklch from-primary via-secondary to-tertiary flex justify-center items-center"
         >
-          <div
-            class="h-45 w-45 aspect-square rounded-[2.5rem] bg-dark flex justify-center items-center"
-          >
-            <div class="h-40 w-40 aspect-square rounded-4xl overflow-hidden">
-              <NuxtImg
-                src="/placeholder.jpg"
-                width="200"
-                quality="50"
-                loading="lazy"
-                class="object-cover object-center"
-              />
-            </div>
-          </div>
+          <NuxtImg
+            v-if="props.isPreview"
+            src="/placeholder.jpg"
+            width="100"
+            quality="50"
+            loading="lazy"
+            class="h-45 w-45 aspect-square rounded-[2.5rem] object-cover object-center"
+          />
+          <NuxtImg
+            v-else
+            :src="props.invitationData.main_info.main_photo_url"
+            width="100"
+            quality="50"
+            loading="lazy"
+            class="h-45 w-45 aspect-square rounded-[2.5rem] object-cover object-center"
+          />
         </div>
       </div>
 
@@ -61,7 +98,7 @@ const openInvitation = () => {
               v-gsap.animateText.delay-2500.slow
               class="text-lg w-fit mx-auto font-bold"
             >
-              Nama Tamu
+              {{ guestName }}
             </p>
           </div>
         </div>

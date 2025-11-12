@@ -106,7 +106,11 @@ onUnmounted(() => {
 
 <template>
   <div class="overflow-hidden">
-    <Welcome v-if="!isIvitationOpened" @open="handleInvitationOpen" />
+    <Welcome
+      v-if="!isIvitationOpened"
+      @open="handleInvitationOpen"
+      :is-preview="true"
+    />
 
     <div
       v-if="isIvitationOpened"

@@ -1,9 +1,11 @@
+<script setup>
+const props = defineProps(["isPreview", "invitationData"]);
+</script>
+
 <template>
   <div class="min-h-dvh bg-[url(/placeholder.jpg)] bg-cover bg-center">
     <div class="h-dvh bg-linear-to-b from-dark/30 via-dark/40 to-dark/50">
-      <div
-        class="w-full h-full mx-auto flex flex-wrap content-between"
-      >
+      <div class="w-full h-full mx-auto flex flex-wrap content-between">
         <div class="w-full"></div>
         <div
           v-gsap.delay-500.slower-10.from="{
@@ -25,9 +27,17 @@
               class="bi bi-bookmarks text-xl bg-linear-to-br/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
             ></i>
             <p
+              v-if="props.isPreview"
               class="text-5xl md:text-6xl font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
             >
               Adam & Hawa
+            </p>
+            <p
+              v-else
+              class="text-5xl md:text-6xl font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+            >
+              {{ props.invitationData.groom }} &
+              {{ props.invitationData.bride }}
             </p>
           </div>
           <div class="flex items-center gap-x-3 mb-3">

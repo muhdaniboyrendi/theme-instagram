@@ -1,15 +1,15 @@
 <script setup>
-// const { checkGuest } = useGuestStore();
 const { fetchInvitationData } = useInvitationStore();
 const route = useRoute();
 
 const invitationSlug = route.params.invitationSlug;
-const guest = route.query.quest || null;
+const guestSlug = route.query.guest || null;
 
 const pending = ref(true);
 const invitationData = ref(null);
 const ispreview = ref(false);
 const isWithGuest = ref(false);
+const isGuestListed = ref(false);
 
 const isIvitationOpened = ref(false);
 const showNavbar = ref(false);
@@ -111,7 +111,6 @@ const loadInvitationData = async () => {
   try {
     const response = await fetchInvitationData(invitationSlug);
 
-    console.log(response);
     invitationData.value = response;
   } catch (error) {
     console.error("Error loading invitation data:", error);
@@ -119,14 +118,18 @@ const loadInvitationData = async () => {
 };
 
 const checkGuest = async () => {
-  if (!guest) {
-    guestListed.value = true;
+  if (!guestSlug) {
+    isWithGuest.value = false;
+    isGuestListed.value = true;
     return;
-  } else {
-    if (invitationData.value.guests.filter((gst) => gst.slug == guest)) {
-      //
-    }
   }
+
+  const guestExists = invitationData.value.guests?.some(
+    (guest) => guest.slug === guestSlug
+  );
+
+  isGuestListed.value = guestExists;
+  isWithGuest.value = true;
 };
 
 const initializeData = async () => {
@@ -143,8 +146,10 @@ const initializeData = async () => {
 };
 
 onMounted(() => {
-  if (invitationSlug.value == "instagram") {
+  if (invitationSlug == "instagram") {
     ispreview.value = true;
+    pending.value = false;
+    isGuestListed.value = true;
   } else {
     ispreview.value = false;
     initializeData();
@@ -161,11 +166,15 @@ onUnmounted(() => {
 <template>
   <LoadingPage v-if="pending" />
 
+  <UnlistedGuest v-else-if="!isGuestListed" :invitation-data="invitationData" />
+
   <div v-else class="overflow-hidden">
     <Welcome
       v-if="!isIvitationOpened"
       @open="handleInvitationOpen"
       :is-preview="ispreview"
+      :is-with-guest="isWithGuest"
+      :guest-slug="guestSlug"
       :invitation-data="invitationData"
     />
 

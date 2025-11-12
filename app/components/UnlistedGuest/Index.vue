@@ -1,17 +1,14 @@
 <script setup>
-const props = defineProps({
-  brideGroomNames: {
-    type: Object,
-    default: () => ({
-      groom: "Adam",
-      bride: "Hawa",
-    }),
-  },
-});
+const props = defineProps(["invitationData"]);
 </script>
 
 <template>
-  <div class="min-h-dvh bg-[url(/placeholder.jpg)] bg-cover bg-center">
+  <div
+    class="min-h-dvh bg-cover bg-center"
+    :style="`background-image: url(${
+      props.invitationData?.main_info?.main_photo_url || '/placeholder.jpg'
+    })`"
+  >
     <div
       class="min-h-dvh py-10 flex flex-wrap justify-center content-around gap-10 bg-dark/85 backdrop-blur-md"
     >
@@ -23,8 +20,8 @@ const props = defineProps({
             v-gsap.animateText.delay-700.slow
             class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
           >
-            {{ props.brideGroomNames.groom }} &
-            {{ props.brideGroomNames.bride }}
+            {{ props.invitationData?.groom_name }} &
+            {{ props.invitationData?.bride_name }}
           </span>
         </h1>
       </div>
