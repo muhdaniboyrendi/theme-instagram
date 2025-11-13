@@ -18,7 +18,7 @@ const props = defineProps({
     >
       <ProfileCoupleInformation
         title="The Bride"
-        image="/placeholder.jpg"
+        image="/placeholder.webp"
         name="Hawa"
         child="Putri dari"
         parent="Bapak Lorem & Ibu Ipsum"
@@ -30,7 +30,7 @@ const props = defineProps({
       />
       <ProfileCoupleInformation
         title="The Groom"
-        image="/placeholder.jpg"
+        image="/placeholder.webp"
         name="Adam"
         child="Putra dari"
         parent="Bapak Lorem & Ibu Ipsum"
@@ -44,7 +44,7 @@ const props = defineProps({
     <div v-else class="w-full flex flex-wrap justify-center gap-x-5 gap-y-20">
       <ProfileCoupleInformation
         title="The Bride"
-        :image="props.invitationData.bride.photo_url || '/placeholder.jpg'"
+        :image="props.invitationData.bride.photo_url || '/placeholder.webp'"
         :name="props.invitationData.bride.full_name"
         child="Putri dari"
         :parent="`Bapak ${props.invitationData.bride.father} & Ibu ${props.invitationData.bride.mother}`"
@@ -56,7 +56,7 @@ const props = defineProps({
       />
       <ProfileCoupleInformation
         title="The Groom"
-        :image="props.invitationData.groom.photo_url || '/placeholder.jpg'"
+        :image="props.invitationData.groom.photo_url || '/placeholder.webp'"
         :name="props.invitationData.groom.full_name"
         child="Putra dari"
         :parent="`Bapak ${props.invitationData.groom.father} & Ibu ${props.invitationData.groom.mother}`"

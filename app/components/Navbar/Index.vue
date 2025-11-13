@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   show: {
     type: Boolean,
     default: false,
@@ -7,13 +7,17 @@ defineProps({
   activePage: {
     typr: String,
   },
+  isPreview: {
+    type: Boolean,
+  },
+  invitationData: {
+    type: Object,
+  },
 });
 
 const emit = defineEmits(["navigate"]);
 
 const handleNavigate = (path) => {
-  console.log(path);
-
   emit("navigate", path);
 };
 </script>
@@ -57,9 +61,7 @@ const handleNavigate = (path) => {
               text="Story"
               :active-page="activePage"
             />
-            <div
-              class="h-8 w-8 mx-auto aspect-square rounded-full border border-slate-700 overflow-hidden"
-            >
+            <div class="mx-auto h-8 w-8 aspect-square">
               <button
                 @click="handleNavigate('profile')"
                 type="button"
@@ -67,7 +69,22 @@ const handleNavigate = (path) => {
                 aria-label="Profile"
                 class="cursor-pointer"
               >
-                <NuxtImg src="/placeholder.jpg" />
+                <NuxtImg
+                  v-if="props.isPreview"
+                  src="/placeholder.webp"
+                  width="50"
+                  quality="50"
+                  loading="lazy"
+                  class="h-8 w-8 aspect-square rounded-full border border-slate-700 overflow-hidden"
+                />
+                <NuxtImg
+                  v-else
+                  :src="props.invitationData.main_info.main_photo_url"
+                  width="50"
+                  quality="50"
+                  loading="lazy"
+                  class="h-8 w-8 aspect-square rounded-full border border-slate-700 overflow-hidden"
+                />
               </button>
             </div>
           </div>

@@ -3,11 +3,16 @@ const isIvitationOpened = ref(false);
 const showNavbar = ref(false);
 const isFullscreen = ref(false);
 const activePage = ref("home");
+const isPlaying = ref(false);
 
 let lastScrollPosition = 0;
 
 const fullscreenIcon = computed(() =>
   isFullscreen.value ? "bi-fullscreen-exit" : "bi-fullscreen"
+);
+
+const audioIcon = computed(() =>
+  isPlaying.value ? "bi-pause-fill" : "bi-music-note"
 );
 
 const shouldShowNavbar = computed(() => {
@@ -64,6 +69,18 @@ const toggleFullscreen = () => {
   isFullscreen.value ? exitFullscreen() : requestFullscreen();
 };
 
+const playAudio = () => {
+  isPlaying.value = false;
+};
+
+const pauseAudio = () => {
+  isPlaying.value = true;
+};
+
+const toggleAudio = () => {
+  isPlaying.value ? playAudio() : pauseAudio();
+};
+
 const handleInvitationOpen = () => {
   requestFullscreen();
 
@@ -116,21 +133,18 @@ onUnmounted(() => {
       v-if="isIvitationOpened"
       class="min-h-dvh bg-off-white dark:bg-dark text-black dark:text-white"
     >
-      <!-- Fullscreen Toggle Button -->
+      <!-- Floating Button -->
       <div
-        class="fixed bottom-33 right-3 md:right-5 z-20 w-8 h-8 bg-linear-to-br/oklch from-primary via-secondary to-tertiary rounded-[0.6rem] flex justify-center items-center hover:scale-110 transition"
+        class="rounded-l-2xl p-2 pr-1 fixed right-0 bottom-1/2 translate-y-1/2 z-20 border border-zinc-700/70 bg-zinc-800/50 backdrop-blur-md flex flex-col gap-2"
       >
-        <button
-          @click="toggleFullscreen"
-          type="button"
-          class="w-7 h-7 font-medium text-sm bg-dark rounded-lg hover:cursor-pointer"
-          aria-label="Toggle Fullscreen"
-        >
-          <i
-            class="bi bg-linear-to-br/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
-            :class="fullscreenIcon"
-          ></i>
-        </button>
+        <!-- Fullscreen Toggle Button -->
+        <FullScreenButton
+          @toggle-full-screen="toggleFullscreen"
+          :fullscreen-icon="fullscreenIcon"
+        />
+
+        <!-- Audio Toggle Button -->
+        <MusicButton @toggle-audio="toggleAudio" :audio-icon="audioIcon" />
       </div>
 
       <!-- Gunakan shouldShowNavbar computed property -->
@@ -138,6 +152,7 @@ onUnmounted(() => {
         @navigate="handleNavigate"
         :show="shouldShowNavbar"
         :active-page="activePage"
+        :is-preview="true"
       />
 
       <div v-if="activePage === 'home'">

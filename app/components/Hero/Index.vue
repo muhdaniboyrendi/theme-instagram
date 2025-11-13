@@ -3,9 +3,9 @@ const props = defineProps(["isPreview", "invitationData"]);
 
 const backgroundStyle = computed(() => ({
   backgroundImage: props.isPreview
-    ? "url(/placeholder.jpg)"
+    ? "url(/placeholder.webp)"
     : `url(${
-        props.invitationData?.main_info?.main_photo_url || "/placeholder.jpg"
+        props.invitationData?.main_info?.main_photo_url || "/placeholder.webp"
       })`,
 }));
 </script>
@@ -76,7 +76,7 @@ const backgroundStyle = computed(() => ({
         >
           <NuxtImg
             v-if="props.isPreview"
-            src="/placeholder.jpg"
+            src="/placeholder.webp"
             width="50"
             loading="lazy"
             quality="30"

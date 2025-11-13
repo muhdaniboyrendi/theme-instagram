@@ -21,16 +21,6 @@ const imageUrl = computed(() => props.src);
       />
     </div>
 
-    <GalleryModal v-model="showModal" :image-url="imageUrl">
-      <!-- <template #body>
-        <div class="flex flex-col items-center">
-          <img
-            :src="imageUrl"
-            alt="Preview image"
-            class="max-h-100 object-contain"
-          />
-        </div>
-      </template> -->
-    </GalleryModal>
+    <GalleryModal v-model="showModal" :image-url="imageUrl" />
   </div>
 </template>

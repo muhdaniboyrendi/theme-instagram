@@ -35,7 +35,7 @@ const closeVideo = () => {
       <GalleryImage
         v-for="(n, index) in 6"
         :key="index"
-        src="/placeholder.jpg"
+        src="/placeholder.webp"
       />
     </div>
     <div v-else class="w-full grid grid-cols-3 gap-0.5">

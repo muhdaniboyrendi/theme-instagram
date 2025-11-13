@@ -27,7 +27,7 @@ const likeClicked = () => {
     >
       <NuxtImg
         v-if="props.isPreview"
-        src="/placeholder.jpg"
+        src="/placeholder.webp"
         alt="Couple photo"
         width="800"
         quality="80"

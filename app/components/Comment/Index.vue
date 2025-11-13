@@ -15,8 +15,15 @@ const props = defineProps({
 });
 
 const containerRef = ref(null);
+const commentsContainerRef = ref(null);
 const viewportHeight = ref(0);
 const isKeyboardOpen = ref(false);
+
+// Reverse comments order
+const reversedComments = computed(() => {
+  if (!props.invitationData?.comments) return [];
+  return [...props.invitationData.comments].reverse();
+});
 
 const updateViewportHeight = () => {
   if (window.visualViewport) {
@@ -60,9 +67,9 @@ const containerHeight = computed(() => {
 });
 
 const contentMaxHeight = computed(() => {
-  const headerHeight = 56; // Header height (py-2 + content)
-  const footerHeight = 72; // Footer height + padding (56 + 16)
-  const extraPadding = 16; // Extra buffer
+  const headerHeight = 56;
+  const footerHeight = 72;
+  const extraPadding = 16;
   return `${
     viewportHeight.value - headerHeight - footerHeight - extraPadding
   }px`;
@@ -84,11 +91,22 @@ const contentMaxHeight = computed(() => {
           v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, x: -30 }"
           class="flex items-center gap-3"
         >
-          <div
-            class="w-10 h-10 rounded-full bg-white flex justify-center items-center"
-          >
-            <i class="bi bi-person-fill text-dark text-2xl"></i>
-          </div>
+          <NuxtImg
+            v-if="props.isPreview"
+            src="/placeholder.webp"
+            width="50"
+            quality="50"
+            loading="lazy"
+            class="w-10 h-10 rounded-full border border-zinc-800"
+          />
+          <NuxtImg
+            v-else
+            :src="props.invitationData.main_info.main_photo_url"
+            width="50"
+            quality="50"
+            loading="lazy"
+            class="w-10 h-10 rounded-full border border-zinc-800"
+          />
           <div>
             <p
               v-if="props.isPreview"
@@ -119,7 +137,8 @@ const contentMaxHeight = computed(() => {
       >
         <!-- Demo Comments -->
         <div
-          class="w-full flex flex-col-reverse gap-4 overflow-y-auto p-4 md:p-6 pb-4"
+          ref="commentsContainerRef"
+          class="w-full flex flex-col-reverse gap-4 overflow-y-auto p-4 md:p-6 pb-4 pt-14"
           :style="{ maxHeight: contentMaxHeight }"
         >
           <CommentCard v-for="(n, index) in 5" :key="index" />
@@ -143,11 +162,12 @@ const contentMaxHeight = computed(() => {
         <!-- Comments List -->
         <div
           v-else
-          class="w-full flex flex-col-reverse gap-4 overflow-y-auto p-4 md:p-6 pb-4"
+          ref="commentsContainerRef"
+          class="w-full flex flex-col-reverse gap-4 overflow-y-auto p-4 md:p-6 pb-4 pt-14"
           :style="{ maxHeight: contentMaxHeight }"
         >
           <CommentCard
-            v-for="comment in props.invitationData.comments"
+            v-for="comment in reversedComments"
             :key="comment.id"
             :comment="comment"
           />
@@ -170,11 +190,6 @@ const contentMaxHeight = computed(() => {
 div[class*="overflow-y-auto"] {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-}
-
-/* Custom scrollbar */
-div[class*="overflow-y-auto"]::-webkit-scrollbar {
-  width: 6px;
 }
 
 div[class*="overflow-y-auto"]::-webkit-scrollbar-track {

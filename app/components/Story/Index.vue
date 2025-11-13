@@ -50,7 +50,7 @@ const storiesCount = computed(() => {
     <div v-if="props.isPreview">
       <div class="w-full h-screen snap-start snap-always flex shrink-0">
         <StoryView
-          image="/placeholder.jpg"
+          image="/placeholder.webp"
           title="Cinta Sejati"
           date="Minggu, 28 Desember 2025"
           description="Sebuah kisah cinta yang abadi."
@@ -58,7 +58,7 @@ const storiesCount = computed(() => {
       </div>
       <div class="w-full h-screen snap-start snap-always flex shrink-0">
         <StoryView
-          image="/placeholder.jpg"
+          image="/placeholder.webp"
           title="Cinta Sejati 2"
           date="Minggu, 28 Desember 2025"
           description="Sebuah kisah cinta yang abadi."

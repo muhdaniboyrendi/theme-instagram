@@ -13,9 +13,9 @@ const openInvitation = () => {
 
 const backgroundStyle = computed(() => ({
   backgroundImage: props.isPreview
-    ? "url(/placeholder.jpg)"
+    ? "url(/placeholder.webp)"
     : `url(${
-        props.invitationData?.main_info?.main_photo_url || "/placeholder.jpg"
+        props.invitationData?.main_info?.main_photo_url || "/placeholder.webp"
       })`,
 }));
 
@@ -71,7 +71,7 @@ const guestName = computed(() => {
           >
             <NuxtImg
               v-if="props.isPreview"
-              src="/placeholder.jpg"
+              src="/placeholder.webp"
               width="100"
               quality="50"
               loading="lazy"
