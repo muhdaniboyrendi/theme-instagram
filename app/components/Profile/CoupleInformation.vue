@@ -129,21 +129,17 @@ const closePhoto = () => {
         <div
           v-if="isProfilePhotoOpen"
           @click="closePhoto"
-          class="fixed inset-0 top-0 left-0 w-screen h-dvh z-50 bg-dark/5 backdrop-blur-lg flex justify-center items-center px-6 cursor-pointer"
+          class="fixed inset-0 top-0 left-0 w-screen h-dvh z-50 bg-dark/5 backdrop-blur-lg flex justify-center items-center px-6"
         >
           <!-- Container Foto -->
           <div @click.stop class="relative">
-            <div
-              class="max-h-70 md:max-h-80 aspect-square rounded-full overflow-hidden shadow-2xl"
-            >
-              <NuxtImg
-                :src="props.image"
-                quality="90"
-                loading="lazy"
-                class="w-full object-cover"
-                alt="Profile Photo"
-              />
-            </div>
+            <NuxtImg
+              :src="props.image"
+              quality="90"
+              loading="lazy"
+              class="max-h-70 md:max-h-80 aspect-square rounded-full object-cover"
+              alt="Profile Photo"
+            />
           </div>
 
           <div

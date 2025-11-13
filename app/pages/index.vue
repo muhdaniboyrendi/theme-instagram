@@ -141,31 +141,31 @@ onUnmounted(() => {
       />
 
       <div v-if="activePage === 'home'">
-        <Hero />
-        <Header />
-        <Quote />
-        <Greetings />
-        <Location />
-        <Gift />
-        <Rsvp />
-        <Closing />
-        <Footer />
+        <Hero :is-preview="true" />
+        <Header :is-preview="true" />
+        <Quote :is-preview="true" />
+        <Greetings :is-preview="true" />
+        <Location :is-preview="true" />
+        <Gift :is-preview="true" />
+        <Rsvp :is-preview="true" />
+        <Closing :is-preview="true" />
+        <Footer :is-preview="true" />
       </div>
 
       <div v-if="activePage === 'gallery'">
-        <Gallery />
+        <Gallery :is-preview="true" />
       </div>
 
       <div v-if="activePage === 'comment'">
-        <Comment />
+        <Comment :is-preview="true" />
       </div>
 
       <div v-if="activePage === 'story'">
-        <Story />
+        <Story :is-preview="true" />
       </div>
 
       <div v-if="activePage === 'profile'">
-        <Profile />
+        <Profile :is-preview="true" />
       </div>
     </div>
   </div>

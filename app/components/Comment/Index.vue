@@ -3,15 +3,14 @@ const props = defineProps({
   invitationData: {
     type: Object,
   },
-  guestData: {
-    type: Object,
-  },
-  guest: {
+  isPreview: {
     type: Boolean,
   },
-  isInvitation: {
+  isWithGuest: {
     type: Boolean,
-    default: false,
+  },
+  guestSlug: {
+    type: String,
   },
 });
 
@@ -19,14 +18,12 @@ const containerRef = ref(null);
 const viewportHeight = ref(0);
 const isKeyboardOpen = ref(false);
 
-// Update container height based on visual viewport
 const updateViewportHeight = () => {
   if (window.visualViewport) {
     viewportHeight.value = window.visualViewport.height;
 
-    // Detect keyboard: if visual viewport is significantly smaller than window height
     const heightDiff = window.innerHeight - window.visualViewport.height;
-    isKeyboardOpen.value = heightDiff > 150; // Threshold 150px to detect keyboard
+    isKeyboardOpen.value = heightDiff > 150;
   } else {
     viewportHeight.value = window.innerHeight;
     isKeyboardOpen.value = false;
@@ -36,13 +33,11 @@ const updateViewportHeight = () => {
 onMounted(() => {
   updateViewportHeight();
 
-  // Listen to visual viewport changes
   if (window.visualViewport) {
     window.visualViewport.addEventListener("resize", updateViewportHeight);
     window.visualViewport.addEventListener("scroll", updateViewportHeight);
   }
 
-  // Fallback for older browsers
   window.addEventListener("resize", updateViewportHeight);
 });
 
@@ -54,12 +49,9 @@ onUnmounted(() => {
   window.removeEventListener("resize", updateViewportHeight);
 });
 
-// Calculate dynamic height
 const containerHeight = computed(() => {
-  const navbarHeight = 64; // 4rem = 64px
+  const navbarHeight = 64;
 
-  // When keyboard is open, use full viewport (no navbar offset)
-  // When keyboard is closed, subtract navbar height
   if (isKeyboardOpen.value) {
     return `${viewportHeight.value}px`;
   } else {
@@ -67,7 +59,6 @@ const containerHeight = computed(() => {
   }
 });
 
-// Calculate content height for scrollable area
 const contentMaxHeight = computed(() => {
   const headerHeight = 56; // Header height (py-2 + content)
   const footerHeight = 72; // Footer height + padding (56 + 16)
@@ -100,13 +91,15 @@ const contentMaxHeight = computed(() => {
           </div>
           <div>
             <p
-              v-if="props.isInvitation"
+              v-if="props.isPreview"
               class="font-semibold text-sm md:text-base"
             >
+              Adam & Hawa
+            </p>
+            <p v-else class="font-semibold text-sm md:text-base">
               {{ props.invitationData.groom_name }} &
               {{ props.invitationData.bride_name }}
             </p>
-            <p v-else class="font-semibold text-sm md:text-base">Adam & Hawa</p>
             <p class="text-xs md:text-sm text-white/70">Ucapan & Doa</p>
           </div>
         </div>
@@ -119,11 +112,25 @@ const contentMaxHeight = computed(() => {
         </div>
       </div>
 
-      <!-- Content Area - Invitation Mode -->
+      <!-- Content Area - Demo Mode -->
       <div
-        v-if="props.isInvitation"
+        v-if="props.isPreview"
         class="w-full h-full relative pt-14 pb-16 flex items-end"
       >
+        <!-- Demo Comments -->
+        <div
+          class="w-full flex flex-col-reverse gap-4 overflow-y-auto p-4 md:p-6 pb-4"
+          :style="{ maxHeight: contentMaxHeight }"
+        >
+          <CommentCard v-for="(n, index) in 5" :key="index" />
+        </div>
+
+        <!-- Footer Input -->
+        <CommentFooter :is-invitation="props.isInvitation" />
+      </div>
+
+      <!-- Content Area -->
+      <div v-else class="w-full h-full relative pt-14 pb-16 flex items-end">
         <!-- Empty State -->
         <div
           v-if="props.invitationData.comments.length === 0"
@@ -136,7 +143,7 @@ const contentMaxHeight = computed(() => {
         <!-- Comments List -->
         <div
           v-else
-          class="w-full flex flex-col-reverse gap-5 overflow-y-auto p-6 pb-2"
+          class="w-full flex flex-col-reverse gap-4 overflow-y-auto p-4 md:p-6 pb-4"
           :style="{ maxHeight: contentMaxHeight }"
         >
           <CommentCard
@@ -147,25 +154,12 @@ const contentMaxHeight = computed(() => {
         </div>
 
         <!-- Footer Input -->
-        <CommentFooter
-          :guest="props.guestData"
-          :has-guest="props.guest"
-          :is-invitation="props.isInvitation"
+        <LazyCommentFooter
+          :is-preview="props.isPreview"
+          :is-with-guest="props.isWithGuest"
+          :guest-slug="props.guestSlug"
+          :invitation-data="props.invitationData"
         />
-      </div>
-
-      <!-- Content Area - Demo Mode -->
-      <div v-else class="w-full h-full relative pt-14 pb-16 flex items-end">
-        <!-- Demo Comments -->
-        <div
-          class="w-full flex flex-col-reverse gap-4 overflow-y-auto p-4 md:p-6 pb-4"
-          :style="{ maxHeight: contentMaxHeight }"
-        >
-          <CommentCard v-for="(n, index) in 5" :key="index" />
-        </div>
-
-        <!-- Footer Input -->
-        <CommentFooter :is-invitation="props.isInvitation" />
       </div>
     </div>
   </section>

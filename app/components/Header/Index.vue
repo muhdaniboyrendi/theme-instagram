@@ -2,11 +2,9 @@
 const props = defineProps({
   invitationData: {
     type: Object,
-    required: false,
   },
-  isInvitation: {
+  isPreview: {
     type: Boolean,
-    default: true,
   },
 });
 
@@ -27,11 +25,13 @@ const likeClicked = () => {
           x: -30,
         }"
       >
-        <!-- <h1 v-if="props.isInvitation" class="text-4xl font-tertiary">
-        {{ props.invitationData.groom_name }} &
-        {{ props.invitationData.bride_name }}
-      </h1> -->
-        <h1 class="text-4xl font-tertiary">Adam & Hawa</h1>
+        <h1 v-if="props.isPreview" class="text-4xl font-tertiary">
+          Adam & Hawa
+        </h1>
+        <h1 v-else class="text-4xl font-tertiary">
+          {{ props.invitationData.groom_name }} &
+          {{ props.invitationData.bride_name }}
+        </h1>
       </div>
 
       <div
@@ -49,12 +49,12 @@ const likeClicked = () => {
         <i class="bi bi-chat-dots text-2xl"></i>
       </div>
     </div>
-    <!-- <HeaderCountdown
-      v-if="props.isInvitation"
+    <LazyHeaderCountdown v-if="props.isPreview" />
+    <HeaderCountdown
+      v-else
       :end-date-string="`${
         props.invitationData.main_info.wedding_date.split('T')[0]
       } ${props.invitationData.main_info.wedding_time}:00`"
-    /> -->
-    <LazyHeaderCountdown />
+    />
   </div>
 </template>

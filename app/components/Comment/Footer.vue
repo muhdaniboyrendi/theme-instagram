@@ -3,15 +3,17 @@
 const { sendMessage } = useCommentStore();
 
 const props = defineProps({
-  guest: {
+  invitationData: {
     type: Object,
   },
-  hasGuest: {
+  isPreview: {
     type: Boolean,
   },
-  isInvitation: {
+  isWithGuest: {
     type: Boolean,
-    default: true,
+  },
+  guestSlug: {
+    type: String,
   },
 });
 
@@ -19,9 +21,21 @@ const textareaRef = ref(null);
 const isLoading = ref(false);
 const isSuccess = ref(false);
 
+const guestNameCompute = computed(() => {
+  if (!props.guestSlug) {
+    return "Tamu Undangan";
+  }
+
+  const guest = props.invitationData?.guests?.find(
+    (g) => g.slug === props.guestSlug
+  );
+
+  return guest?.name || "Tamu Undangan";
+});
+
 const formData = reactive({
-  invitation_id: props.isInvitation ? props.guest?.invitation_id : "id",
-  name: props.isInvitation ? props.guest?.name : "John Doe",
+  invitation_id: props.isPreview ? "" : props.invitationData?.id,
+  name: props.isPreview ? "" : guestNameCompute.value,
   message: "",
 });
 
@@ -76,6 +90,8 @@ const submitMessage = async () => {
   try {
     isLoading.value = true;
 
+    console.log(formData)
+
     const response = await sendMessage(formData);
 
     formData.message = "";
@@ -92,6 +108,7 @@ const submitMessage = async () => {
     }
   } catch (error) {
     console.error("Error submitting message:", error);
+    console.error("Error submitting message:", error.validationErrors);
 
     if (error.statusCode === 400) {
       alert("Data yang dikirim tidak valid. Silakan periksa kembali.");
@@ -186,7 +203,7 @@ const isOverLimit = computed(() => remainingChars.value < 0);
 
       <!-- Send button -->
       <button
-        v-if="props.hasGuest"
+        v-if="props.isWithGuest"
         @click="submitMessage"
         :disabled="isLoading || !formData.message.trim() || isOverLimit"
         class="absolute right-0 bottom-0 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer transition-all duration-200"

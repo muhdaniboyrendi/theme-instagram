@@ -1,11 +1,10 @@
 <script setup>
 const props = defineProps({
   invitationData: {
-    type: [Object, Array],
+    type: Object,
   },
-  isInvitation: {
+  isPreview: {
     type: Boolean,
-    default: false,
   },
 });
 
@@ -35,7 +34,7 @@ const scrollToStory = (index) => {
 };
 
 const storiesCount = computed(() => {
-  return props.isInvitation ? props.invitationData?.length || 0 : 2;
+  return props.isPreview ? 2 : props.invitationData?.love_stories?.length || 0;
 });
 </script>
 
@@ -48,23 +47,7 @@ const storiesCount = computed(() => {
     style="scroll-behavior: smooth; -webkit-overflow-scrolling: touch"
   >
     <!-- Dengan data invitation -->
-    <template v-if="props.isInvitation">
-      <div
-        v-for="(story, index) in props.invitationData"
-        :key="index"
-        class="w-full h-screen snap-start snap-always flex shrink-0"
-      >
-        <StoryView
-          :image="story.thumbnail_url"
-          :title="story.title"
-          :date="formatIndonesianDate(story.date)"
-          :description="story.description"
-        />
-      </div>
-    </template>
-
-    <!-- Tanpa data invitation (static) -->
-    <template v-else>
+    <div v-if="props.isPreview">
       <div class="w-full h-screen snap-start snap-always flex shrink-0">
         <StoryView
           image="/placeholder.jpg"
@@ -81,7 +64,23 @@ const storiesCount = computed(() => {
           description="Sebuah kisah cinta yang abadi."
         />
       </div>
-    </template>
+    </div>
+
+    <!-- Tanpa data invitation (static) -->
+    <div v-else>
+      <div
+        v-for="(story, index) in props.invitationData.love_stories"
+        :key="index"
+        class="w-full h-screen snap-start snap-always flex shrink-0"
+      >
+        <StoryView
+          :image="story.thumbnail_url"
+          :title="story.title"
+          :date="formatIndonesianDate(story.date)"
+          :description="story.description"
+        />
+      </div>
+    </div>
   </section>
 
   <!-- Story Progress Indicator (opsional, seperti Instagram) -->

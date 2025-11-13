@@ -2,11 +2,9 @@
 const props = defineProps({
   invitationData: {
     type: Object,
-    required: false,
   },
-  isInvitation: {
+  isPreview: {
     type: Boolean,
-    default: true,
   },
 });
 
@@ -28,8 +26,18 @@ const likeClicked = () => {
       class="w-full"
     >
       <NuxtImg
+        v-if="props.isPreview"
         src="/placeholder.jpg"
-        alt="Adam & Hawa"
+        alt="Couple photo"
+        width="800"
+        quality="80"
+        loading="lazy"
+        class="w-full"
+      />
+      <NuxtImg
+        v-else
+        :src="props.invitationData.main_info?.main_photo_url"
+        alt="Couple photo"
         width="800"
         quality="80"
         loading="lazy"

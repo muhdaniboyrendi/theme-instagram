@@ -2,24 +2,64 @@
 const { attendanceConfirmation } = useGuestStore();
 
 const props = defineProps({
-  guestData: {
+  invitationData: {
     type: Object,
   },
-  isInvitation: {
+  isPreview: {
     type: Boolean,
-    default: false,
+  },
+  isWithGuest: {
+    type: Boolean,
+  },
+  guestSlug: {
+    type: String,
   },
 });
 
-const guestName = ref(props.isInvitation ? props.guestData.name : "");
+const guestIdCompute = computed(() => {
+  if (!props.guestSlug) {
+    return "id";
+  }
+
+  const guest = props.invitationData?.guests?.find(
+    (g) => g.slug === props.guestSlug
+  );
+
+  return guest?.id || "id";
+});
+
+const guestNameCompute = computed(() => {
+  if (!props.guestSlug) {
+    return "Tamu Undangan";
+  }
+
+  const guest = props.invitationData?.guests?.find(
+    (g) => g.slug === props.guestSlug
+  );
+
+  return guest?.name || "Tamu Undangan";
+});
+
+const guestAttendanceCompute = computed(() => {
+  if (!props.guestSlug) {
+    return "pending";
+  }
+
+  const guest = props.invitationData?.guests?.find(
+    (g) => g.slug === props.guestSlug
+  );
+
+  return guest?.attendance_status || "pending";
+});
+
+const guestName = ref(props.isPreview ? "" : guestNameCompute.value);
 const isLoading = ref(false);
 const attendingSuccess = ref(false);
 
+// Perbaikan: tambahkan .value untuk mengambil nilai computed
 const formData = reactive({
-  id: props.isInvitation ? props.guestData.id : "id",
-  attendance_status: props.isInvitation
-    ? props.guestData.attendance_status
-    : "pending",
+  id: props.isPreview ? "id" : guestIdCompute.value,
+  attendance_status: props.isPreview ? "pending" : guestAttendanceCompute.value,
 });
 
 const handleAttendanceConfirmation = async () => {
@@ -49,11 +89,7 @@ const updateAttendanceStatus = (value) => {
 
 <template>
   <section class="w-full max-w-4xl mx-auto py-10">
-    <RsvpHead
-      :status="
-        props.isInvitation ? props.guestData.attendance_status : 'pending'
-      "
-    />
+    <RsvpHead :status="props.isPreview ? 'pending' : guestAttendanceCompute" />
     <form
       v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, scale: 0 }"
       @submit.prevent="handleAttendanceConfirmation"
@@ -94,7 +130,7 @@ const updateAttendanceStatus = (value) => {
           <button
             type="submit"
             :disabled="isLoading"
-            class="w-full p-0.5 text-white font-semibold bg-linear-to-r/oklch from-primary via-secondary to-tertiary rounded-[0.6rem] mt-5 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            class="w-full p-0.5 text-white font-semibold bg-linear-to-r/oklch from-primary via-secondary to-tertiary rounded-[0.6rem] mt-5 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:scale-102 active:scale-95 transition duration-300"
           >
             <span class="py-2 w-full bg-dark rounded-lg block">
               <span

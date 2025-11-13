@@ -16,23 +16,15 @@ const props = defineProps({
     >
       <div
         v-gsap.whenVisible.once.slower-10.from="{ opacity: 0, x: -30 }"
-        class="w-20 h-20 rounded-full bg-linear-to-br flex justify-center items-center"
-        :class="
-          props.status === 'attending'
-            ? 'from-primary via-secondary to-tertiary'
-            : 'bg-white'
-        "
+        class="w-20 h-20 rounded-full flex justify-center items-center"
+        :class="props.status === 'attending' ? 'bg-green-500' : 'bg-white'"
       >
         <i class="bi bi-person-check"></i>
       </div>
       <div
         v-gsap.whenVisible.once.slower-10.from="{ opacity: 0, x: 30 }"
-        class="w-20 h-20 rounded-full bg-linear-to-br flex justify-center items-center"
-        :class="
-          props.status === 'not_attending'
-            ? 'from-primary via-secondary to-tertiary'
-            : 'bg-white'
-        "
+        class="w-20 h-20 rounded-full flex justify-center items-center"
+        :class="props.status === 'not_attending' ? 'bg-red-500' : 'bg-white'"
       >
         <i class="bi bi-person-x"></i>
       </div>

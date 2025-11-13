@@ -1,9 +1,17 @@
 <script setup>
 const props = defineProps(["isPreview", "invitationData"]);
+
+const backgroundStyle = computed(() => ({
+  backgroundImage: props.isPreview
+    ? "url(/placeholder.jpg)"
+    : `url(${
+        props.invitationData?.main_info?.main_photo_url || "/placeholder.jpg"
+      })`,
+}));
 </script>
 
 <template>
-  <div class="min-h-dvh bg-[url(/placeholder.jpg)] bg-cover bg-center">
+  <div class="min-h-dvh bg-cover bg-center" :style="backgroundStyle">
     <div class="h-dvh bg-linear-to-b from-dark/30 via-dark/40 to-dark/50">
       <div class="w-full h-full mx-auto flex flex-wrap content-between">
         <div class="w-full"></div>
@@ -28,24 +36,34 @@ const props = defineProps(["isPreview", "invitationData"]);
             ></i>
             <p
               v-if="props.isPreview"
-              class="text-5xl md:text-6xl font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+              class="text-5xl md:text-6xl font-tertiary bg-linear-to-r/oklch from-tertiary via-secondary to-primary bg-clip-text text-transparent"
             >
               Adam & Hawa
             </p>
             <p
               v-else
-              class="text-5xl md:text-6xl font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+              class="text-5xl md:text-6xl font-tertiary bg-linear-to-r/oklch from-tertiary via-secondary to-primary bg-clip-text text-transparent"
             >
-              {{ props.invitationData.groom }} &
-              {{ props.invitationData.bride }}
+              {{ props.invitationData.groom_name }} &
+              {{ props.invitationData.bride_name }}
             </p>
           </div>
           <div class="flex items-center gap-x-3 mb-3">
             <i
               class="bi bi-calendar4 text-xl bg-linear-to-br/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
             ></i>
-            <p class="md:text-lg text-shadow-dark/50 font-semibold">
+            <p
+              v-if="props.isPreview"
+              class="md:text-lg text-shadow-dark/50 font-semibold"
+            >
               Minggu, 28 Desember 2025
+            </p>
+            <p v-else class="md:text-lg text-shadow-dark/50 font-semibold">
+              {{
+                formatIndonesianDate(
+                  props.invitationData.main_info?.wedding_date
+                )
+              }}
             </p>
           </div>
         </div>
@@ -57,7 +75,17 @@ const props = defineProps(["isPreview", "invitationData"]);
           class="w-full flex justify-between items-center p-4"
         >
           <NuxtImg
+            v-if="props.isPreview"
             src="/placeholder.jpg"
+            width="50"
+            loading="lazy"
+            quality="30"
+            alt="Couple"
+            class="w-10 h-10 object-cover rounded-xl border-2 border-white"
+          />
+          <NuxtImg
+            v-else
+            :src="props.invitationData.main_info?.main_photo_url"
             width="50"
             loading="lazy"
             quality="30"

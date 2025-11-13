@@ -3,7 +3,7 @@ const props = defineProps({
   invitationData: {
     type: Object,
   },
-  isInvitation: {
+  isPreview: {
     type: Boolean,
     default: false,
   },
@@ -12,9 +12,60 @@ const props = defineProps({
 
 <template>
   <section class="w-full">
-    <ProfileCouple
-      :invitation-data="props.invitationData || {}"
-      :is-invitation="props.isInvitation"
-    />
+    <div
+      v-if="props.isPreview"
+      class="w-full flex flex-wrap justify-center gap-x-5 gap-y-20"
+    >
+      <ProfileCoupleInformation
+        title="The Bride"
+        image="/placeholder.jpg"
+        name="Hawa"
+        child="Putri dari"
+        parent="Bapak Lorem & Ibu Ipsum"
+        social="@ea_invitation"
+        social-link="https://instagram.com/ea_invitatiton"
+        posts="1"
+        followers="999"
+        following="666"
+      />
+      <ProfileCoupleInformation
+        title="The Groom"
+        image="/placeholder.jpg"
+        name="Adam"
+        child="Putra dari"
+        parent="Bapak Lorem & Ibu Ipsum"
+        social="@ea_invitation"
+        social-link="https://instagram.com/ea_invitatiton"
+        posts="1"
+        followers="999"
+        following="666"
+      />
+    </div>
+    <div v-else class="w-full flex flex-wrap justify-center gap-x-5 gap-y-20">
+      <ProfileCoupleInformation
+        title="The Bride"
+        :image="props.invitationData.bride.photo_url || '/placeholder.jpg'"
+        :name="props.invitationData.bride.full_name"
+        child="Putri dari"
+        :parent="`Bapak ${props.invitationData.bride.father} & Ibu ${props.invitationData.bride.mother}`"
+        :social="`@${props.invitationData.bride.instagram}`"
+        :social-link="`https://instagram.com/${props.invitationData.bride.instagram}`"
+        posts="1"
+        followers="999"
+        following="666"
+      />
+      <ProfileCoupleInformation
+        title="The Groom"
+        :image="props.invitationData.groom.photo_url || '/placeholder.jpg'"
+        :name="props.invitationData.groom.full_name"
+        child="Putra dari"
+        :parent="`Bapak ${props.invitationData.groom.father} & Ibu ${props.invitationData.groom.mother}`"
+        :social="`@${props.invitationData.groom.instagram}`"
+        :social-link="`https://instagram.com/${props.invitationData.groom.instagram}`"
+        posts="1"
+        followers="999"
+        following="666"
+      />
+    </div>
   </section>
 </template>

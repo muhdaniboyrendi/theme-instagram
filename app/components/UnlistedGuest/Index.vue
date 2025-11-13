@@ -18,7 +18,7 @@ const props = defineProps(["invitationData"]);
           <span v-gsap.animateText class="text-slate-300">The Wedding of</span>
           <span
             v-gsap.animateText.delay-700.slow
-            class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+            class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-tertiary via-secondary to-primary bg-clip-text text-transparent"
           >
             {{ props.invitationData?.groom_name }} &
             {{ props.invitationData?.bride_name }}
@@ -59,7 +59,7 @@ const props = defineProps(["invitationData"]);
             >guest</span
           >
           <div
-            class="flex items-center justify-center gap-2 bg-linear-to-r/oklch from-red-500 via-rose-500 to-red-500 bg-clip-text text-transparent"
+            class="flex items-center justify-center gap-2 text-red-600"
           >
             <p
               v-gsap.animateText.delay-2500.slow

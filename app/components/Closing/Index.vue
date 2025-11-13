@@ -8,7 +8,7 @@ const likeClicked = () => {
 </script>
 
 <template>
-  <div class="w-full max-w-4xl mx-auto">
+  <div class="w-full">
     <div class="w-full p-5 my-5 bg-zinc-800/70 flex justify-center">
       <div
         v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, scale: 0 }"

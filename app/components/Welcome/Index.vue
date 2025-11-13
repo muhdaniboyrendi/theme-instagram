@@ -44,13 +44,13 @@ const guestName = computed(() => {
           <span
             v-if="props.isPreview"
             v-gsap.animateText.delay-700.slow
-            class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+            class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-tertiary via-secondary to-primary bg-clip-text text-transparent"
             >Adam & Hawa</span
           >
           <span
             v-else
             v-gsap.animateText.delay-700.slow
-            class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+            class="text-6xl w-fit mx-auto font-medium font-tertiary bg-linear-to-r/oklch from-tertiary via-secondary to-primary bg-clip-text text-transparent"
             >{{ props.invitationData.groom_name }} &
             {{ props.invitationData.bride_name }}</span
           >
@@ -66,22 +66,26 @@ const guestName = computed(() => {
           }"
           class="h-50 w-50 aspect-square mx-auto rounded-[3rem] bg-linear-to-br/oklch from-primary via-secondary to-tertiary flex justify-center items-center"
         >
-          <NuxtImg
-            v-if="props.isPreview"
-            src="/placeholder.jpg"
-            width="100"
-            quality="50"
-            loading="lazy"
-            class="h-45 w-45 aspect-square rounded-[2.5rem] object-cover object-center"
-          />
-          <NuxtImg
-            v-else
-            :src="props.invitationData.main_info.main_photo_url"
-            width="100"
-            quality="50"
-            loading="lazy"
-            class="h-45 w-45 aspect-square rounded-[2.5rem] object-cover object-center"
-          />
+          <div
+            class="h-47 w-47 aspect-square rounded-[2.8rem] bg-dark flex justify-center items-center"
+          >
+            <NuxtImg
+              v-if="props.isPreview"
+              src="/placeholder.jpg"
+              width="100"
+              quality="50"
+              loading="lazy"
+              class="h-45 w-45 aspect-square rounded-[2.5rem] object-cover object-center"
+            />
+            <NuxtImg
+              v-else
+              :src="props.invitationData.main_info.main_photo_url"
+              width="100"
+              quality="50"
+              loading="lazy"
+              class="h-45 w-45 aspect-square rounded-[2.5rem] object-cover object-center"
+            />
+          </div>
         </div>
       </div>
 
@@ -92,7 +96,7 @@ const guestName = computed(() => {
             >guest</span
           >
           <div
-            class="flex items-center bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+            class="flex items-center bg-linear-to-r/oklch from-tertiary via-secondary to-primary bg-clip-text text-transparent"
           >
             <p
               v-gsap.animateText.delay-2500.slow

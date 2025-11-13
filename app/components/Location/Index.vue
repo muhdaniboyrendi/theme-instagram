@@ -3,9 +3,8 @@ const props = defineProps({
   invitationData: {
     type: Object,
   },
-  isInvitation: {
+  isPreview: {
     type: Boolean,
-    default: true,
   },
 });
 </script>
@@ -13,23 +12,8 @@ const props = defineProps({
 <template>
   <section class="w-full">
     <LazySubHeader icon="bi-geo-alt-fill" title="lokasi_&_acara" />
-    <!-- <div
-      v-if="props.isInvitation"
-      class="w-full bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
-    >
-      <LazyLocationEvent
-        v-for="eventData in props.invitationData.events"
-        :key="eventData.id"
-        :title="eventData.name"
-        :place="eventData.venue"
-        :embed-url="eventData.maps_embed_url"
-        :date="formatIndonesianDate(eventData.date)"
-        :time="`${eventData.time_start} WIB`"
-        :link="eventData.maps_url"
-        :invitation-data="props.invitationData"
-      />
-    </div> -->
     <div
+      v-if="props.isPreview"
       class="w-full bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
     >
       <LazyLocationEvent
@@ -47,6 +31,22 @@ const props = defineProps({
         date="Minggu, 28 Desember 2025"
         time="09.00 - 10.00 WIB"
         link="https://maps.app.goo.gl/myhfvssFkYKq755Y8"
+      />
+    </div>
+    <div
+      v-else
+      class="w-full bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
+    >
+      <LazyLocationEvent
+        v-for="eventData in props.invitationData.events"
+        :key="eventData.id"
+        :title="eventData.name"
+        :place="eventData.venue"
+        :embed-url="eventData.maps_embed_url"
+        :date="formatIndonesianDate(eventData.date)"
+        :time="`${eventData.time_start} WIB`"
+        :link="eventData.maps_url"
+        :invitation-data="props.invitationData"
       />
     </div>
   </section>

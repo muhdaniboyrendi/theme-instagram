@@ -7,7 +7,7 @@ const guestSlug = route.query.guest || null;
 
 const pending = ref(true);
 const invitationData = ref(null);
-const ispreview = ref(false);
+const isPreview = ref(false);
 const isWithGuest = ref(false);
 const isGuestListed = ref(false);
 
@@ -98,8 +98,6 @@ const handleScroll = () => {
 };
 
 const handleNavigate = (path) => {
-  console.log("index", path);
-
   activePage.value = path;
 
   if (process.client) {
@@ -147,11 +145,11 @@ const initializeData = async () => {
 
 onMounted(() => {
   if (invitationSlug == "instagram") {
-    ispreview.value = true;
+    isPreview.value = true;
     pending.value = false;
     isGuestListed.value = true;
   } else {
-    ispreview.value = false;
+    isPreview.value = false;
     initializeData();
   }
 
@@ -172,7 +170,7 @@ onUnmounted(() => {
     <Welcome
       v-if="!isIvitationOpened"
       @open="handleInvitationOpen"
-      :is-preview="ispreview"
+      :is-preview="isPreview"
       :is-with-guest="isWithGuest"
       :guest-slug="guestSlug"
       :invitation-data="invitationData"
@@ -207,31 +205,42 @@ onUnmounted(() => {
       />
 
       <div v-if="activePage === 'home'">
-        <Hero :is-preview="ispreview" :invitation-data="invitationData" />
-        <Header :is-preview="ispreview" :invitation-data="invitationData" />
-        <Quote :is-preview="ispreview" :invitation-data="invitationData" />
-        <Greetings :is-preview="ispreview" :invitation-data="invitationData" />
-        <Location :is-preview="ispreview" :invitation-data="invitationData" />
-        <Gift :is-preview="ispreview" :invitation-data="invitationData" />
-        <Rsvp :is-preview="ispreview" :invitation-data="invitationData" />
-        <Closing :is-preview="ispreview" :invitation-data="invitationData" />
-        <Footer :is-preview="ispreview" :invitation-data="invitationData" />
+        <Hero :is-preview="isPreview" :invitation-data="invitationData" />
+        <Header :is-preview="isPreview" :invitation-data="invitationData" />
+        <Quote :is-preview="isPreview" :invitation-data="invitationData" />
+        <Greetings :is-preview="isPreview" :invitation-data="invitationData" />
+        <Location :is-preview="isPreview" :invitation-data="invitationData" />
+        <Gift :is-preview="isPreview" :invitation-data="invitationData" />
+        <Rsvp
+          v-if="isPreview || (!isPreview && isWithGuest)"
+          :is-preview="isPreview"
+          :is-with-guest="isWithGuest"
+          :guest-slug="guestSlug"
+          :invitation-data="invitationData"
+        />
+        <Closing :is-preview="isPreview" :invitation-data="invitationData" />
+        <Footer :is-preview="isPreview" :invitation-data="invitationData" />
       </div>
 
       <div v-if="activePage === 'gallery'">
-        <Gallery :is-preview="ispreview" :invitation-data="invitationData" />
+        <Gallery :is-preview="isPreview" :invitation-data="invitationData" />
       </div>
 
       <div v-if="activePage === 'comment'">
-        <Comment :is-preview="ispreview" :invitation-data="invitationData" />
+        <Comment
+          :is-preview="isPreview"
+          :is-with-guest="isWithGuest"
+          :guest-slug="guestSlug"
+          :invitation-data="invitationData"
+        />
       </div>
 
       <div v-if="activePage === 'story'">
-        <Story :is-preview="ispreview" :invitation-data="invitationData" />
+        <Story :is-preview="isPreview" :invitation-data="invitationData" />
       </div>
 
       <div v-if="activePage === 'profile'">
-        <Profile :is-preview="ispreview" :invitation-data="invitationData" />
+        <Profile :is-preview="isPreview" :invitation-data="invitationData" />
       </div>
     </div>
   </div>
