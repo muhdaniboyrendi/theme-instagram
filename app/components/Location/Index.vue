@@ -14,7 +14,7 @@ const props = defineProps({
     <LazySubHeader icon="bi-geo-alt-fill" title="lokasi_&_acara" />
     <div
       v-if="props.isPreview"
-      class="w-full bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
+      class="w-full bg-zinc-200 dark:bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
     >
       <LazyLocationEvent
         title="Akad Nikah"

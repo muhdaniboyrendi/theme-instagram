@@ -101,12 +101,12 @@ const updateAttendanceStatus = (value) => {
             v-model="guestName"
             type="text"
             id="floating_outlined"
-            class="block px-3 pb-2.5 pt-4 w-full text-white font-semibold bg-transparent rounded-lg border-2 border-white/20 appearance-none focus:outline-none focus:ring-0 peer"
+            class="block px-3 pb-2.5 pt-4 w-full text-dark dark:text-white font-semibold bg-transparent rounded-lg border-2 border-dark/20 dark:border-white/20 appearance-none focus:outline-none focus:ring-0 peer"
             placeholder=" "
           />
           <label
             for="floating_outlined"
-            class="absolute text-white/70 duration-300 transform -translate-y-4 scale-75 top-2 z-10 bg-dark px-2 peer-focus:px-2peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+            class="absolute text-zinc-700 dark:text-zinc-300 duration-300 transform -translate-y-4 scale-75 top-2 z-10 bg-off-white dark:bg-dark px-2 peer-focus:px-2peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
             >Nama</label
           >
         </div>
@@ -130,11 +130,13 @@ const updateAttendanceStatus = (value) => {
           <button
             type="submit"
             :disabled="isLoading"
-            class="w-full p-0.5 text-white font-semibold bg-linear-to-r/oklch from-primary via-secondary to-tertiary rounded-[0.6rem] mt-5 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:scale-102 active:scale-95 transition duration-300"
+            class="w-full p-0.5 text-dark dark:text-white font-semibold bg-linear-to-r/oklch from-primary via-secondary to-tertiary rounded-[0.6rem] mt-5 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:scale-102 active:scale-95 transition duration-300"
           >
-            <span class="py-2 w-full bg-dark rounded-lg block">
+            <span
+              class="py-2 w-full bg-off-white dark:bg-dark rounded-lg block"
+            >
               <span
-                class="bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent"
+                class="bg-linear-to-r/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent font-bold"
               >
                 <i v-if="attendingSuccess" class="bi bi-check2-all"></i>
                 {{

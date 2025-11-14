@@ -39,7 +39,7 @@ const handleChange = (event) => {
     />
     <label
       :for="props.id"
-      class="inline-flex items-center justify-center gap-2 w-full py-2 text-white font-semibold border-2 border-white/50 rounded-lg cursor-pointer peer-checked:bg-white peer-checked:text-dark hover:border-white transition"
+      class="inline-flex items-center justify-center gap-2 w-full py-3 text-dark dark:text-white font-semibold bg-zinc-200 dark:bg-zinc-800 rounded-lg cursor-pointer peer-checked:bg-fourth peer-checked:text-white hover:border-white transition"
     >
       <i v-if="modelValue === props.value" class="bi bi-check2-square"></i
       ><span class="font-medium">{{ props.label }}</span>

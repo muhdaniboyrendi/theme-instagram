@@ -1,4 +1,20 @@
 <script setup>
+useSeoMeta({
+  title: "EA Invitation - Platform Undangan Pernikahan Digital",
+  description:
+    "Wujudkan momen bahagia pernikahan Anda dengan undangan digital yang modern, elegan, dan interaktif.",
+  ogTitle: "EA Invitation - Platform Undangan Pernikahan Digital",
+  ogDescription:
+    "Wujudkan momen bahagia pernikahan Anda dengan undangan digital yang modern, elegan, dan interaktif.",
+  ogImage: "/og-image.png",
+  ogUrl: "/",
+  twitterCard: "summary_large_image",
+  twitterTitle: "EA Invitation - Platform Undangan Pernikahan Digital",
+  twitterDescription:
+    "Wujudkan momen bahagia pernikahan Anda dengan undangan digital yang modern, elegan, dan interaktif.",
+  twitterImage: "/og-image.png",
+});
+
 const isIvitationOpened = ref(false);
 const showNavbar = ref(false);
 const isFullscreen = ref(false);
@@ -135,7 +151,7 @@ onUnmounted(() => {
     >
       <!-- Floating Button -->
       <div
-        class="rounded-l-2xl p-2 pr-1 fixed right-0 bottom-1/2 translate-y-1/2 z-20 border border-zinc-700/70 bg-zinc-800/50 backdrop-blur-md flex flex-col gap-2"
+        class="rounded-l-2xl p-2 pr-1 fixed right-0 bottom-1/2 z-20 border border-zinc-300/70 dark:border-zinc-700/70 bg-zinc-200/50 dark:bg-zinc-800/50 backdrop-blur-md flex flex-col gap-2"
       >
         <!-- Fullscreen Toggle Button -->
         <FullScreenButton

@@ -56,7 +56,7 @@ const closePhoto = () => {
       <div class="w-full">
         <div class="w-full flex justify-between items-center">
           <p class="mb-2 text-sm font-bold">Lorem Ipsum Dolor Sit Amet</p>
-          <span class="text-zinc-400 text-xs">he/him</span>
+          <span class="text-zinc-600 dark:text-zinc-400 text-xs">he/him</span>
         </div>
         <div class="w-full grid grid-cols-3">
           <div
@@ -99,7 +99,7 @@ const closePhoto = () => {
         <a
           :href="props.socialLink"
           target="_blank"
-          class="w-full py-2 block font-semibold text-center text-sm bg-zinc-800 hover:bg-zinc-700 rounded-lg transition duration"
+          class="w-full py-2 block font-semibold text-center text-sm bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 rounded-lg transition duration"
           >Instagram</a
         >
       </div>
@@ -110,7 +110,7 @@ const closePhoto = () => {
         <a
           :href="props.socialLink"
           target="_blank"
-          class="w-full py-2 block font-semibold text-center text-sm bg-zinc-800 hover:bg-zinc-700 rounded-lg transition duration"
+          class="w-full py-2 block font-semibold text-center text-sm bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 rounded-lg transition duration"
           >{{ props.social }}</a
         >
       </div>
@@ -147,30 +147,34 @@ const closePhoto = () => {
           >
             <div class="flex flex-col justify-center gap-3">
               <div
-                class="w-13 h-13 aspect-square rounded-full bg-dark border border-zinc-800 flex justify-center items-center"
+                class="w-13 h-13 aspect-square rounded-full bg-off-white dark:bg-dark border border-zinc-200 dark:border-zinc-800 flex justify-center items-center"
               >
-                <i class="bi bi-send text-white text-xl"></i>
+                <i class="bi bi-send text-dark dark:text-white text-xl"></i>
               </div>
             </div>
             <div class="flex flex-col justify-center gap-3">
               <div
-                class="w-13 h-13 aspect-square rounded-full bg-dark border border-zinc-800 flex justify-center items-center"
+                class="w-13 h-13 aspect-square rounded-full bg-off-white dark:bg-dark border border-zinc-200 dark:border-zinc-800 flex justify-center items-center"
               >
-                <i class="bi bi-people text-white text-xl"></i>
+                <i class="bi bi-people text-dark dark:text-white text-xl"></i>
               </div>
             </div>
             <div class="flex flex-col justify-center gap-3">
               <div
-                class="w-13 h-13 aspect-square rounded-full bg-dark border border-zinc-800 flex justify-center items-center"
+                class="w-13 h-13 aspect-square rounded-full bg-off-white dark:bg-dark border border-zinc-200 dark:border-zinc-800 flex justify-center items-center"
               >
-                <i class="bi bi-link-45deg text-white text-xl"></i>
+                <i
+                  class="bi bi-link-45deg text-dark dark:text-white text-xl"
+                ></i>
               </div>
             </div>
             <div class="flex flex-col justify-center gap-3">
               <div
-                class="w-13 h-13 aspect-square rounded-full bg-dark border border-zinc-800 flex justify-center items-center"
+                class="w-13 h-13 aspect-square rounded-full bg-off-white dark:bg-dark border border-zinc-200 dark:border-zinc-800 flex justify-center items-center"
               >
-                <i class="bi bi-qr-code-scan text-white text-xl"></i>
+                <i
+                  class="bi bi-qr-code-scan text-dark dark:text-white text-xl"
+                ></i>
               </div>
             </div>
           </div>

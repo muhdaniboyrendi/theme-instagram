@@ -23,7 +23,7 @@ const emit = defineEmits(["navigate"]);
         props.icon,
         props.activePage === props.path
           ? 'bg-linear-to-br/oklch from-primary via-secondary to-tertiary bg-clip-text text-transparent'
-          : 'text-white',
+          : 'text-dark dark:text-white',
       ]"
     ></i>
   </button>

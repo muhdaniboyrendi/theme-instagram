@@ -15,7 +15,7 @@ const props = defineProps(["icon", "title"]);
         class="w-10 h-10 rounded-full bg-linear-to-br/oklch from-primary via-secondary to-tertiary flex justify-center items-center"
       >
         <div
-          class="w-9 h-9 bg-dark rounded-full flex justify-center items-center"
+          class="w-9 h-9 bg-off-white dark:bg-dark rounded-full flex justify-center items-center"
         >
           <i class="bi text-lg" :class="props.icon"></i>
         </div>

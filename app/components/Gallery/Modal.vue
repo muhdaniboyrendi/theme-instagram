@@ -65,16 +65,20 @@ onMounted(() => {
         <div
           v-gsap.once.slower-20.from="{ opacity: 0, scale: 0 }"
           @click.stop
-          class="bg-dark rounded-xl w-fit mx-auto overflow-hidden"
+          class="bg-off-white dark:bg-dark rounded-xl w-fit mx-auto overflow-hidden"
         >
           <div class="p-3 flex justify-between items-center border-b">
             <div class="flex items-center gap-3">
               <div
-                class="w-10 h-10 rounded-full bg-white flex justify-center items-center text-dark"
+                class="w-10 h-10 rounded-full bg-dark dark:bg-white flex justify-center items-center text-white dark:text-dark"
               >
                 <i class="bi bi-image"></i>
               </div>
-              <p class="text-white text-sm md:text-base font-semibold">foto</p>
+              <p
+                class="text-dark dark:text-white text-sm md:text-base font-semibold"
+              >
+                foto
+              </p>
             </div>
             <button
               @click="close()"
@@ -98,7 +102,7 @@ onMounted(() => {
           </div>
 
           <div
-            class="py-3 px-10 bg-dark text-white text-2xl flex justify-between space-x-2"
+            class="py-3 px-10 bg-off-white dark:bg-dark text-dark dark:text-white text-2xl flex justify-between space-x-2"
           >
             <i
               class="bi cursor-pointer hover:scale-110 active:scale-90 transition duration"

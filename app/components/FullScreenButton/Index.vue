@@ -16,7 +16,7 @@ const toggleFullscreen = () => {
       aria-label="Toggle Fullscreen"
     >
       <i
-        class="bi text-white group-hover:text-tertiary"
+        class="bi text-dark dark:text-white group-hover:text-tertiary"
         :class="props.fullscreenIcon"
       ></i>
     </button>

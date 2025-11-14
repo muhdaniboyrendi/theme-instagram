@@ -23,10 +23,10 @@ const closeVideo = () => {
   <section class="w-full pb-20">
     <div class="w-full p-3">
       <div
-        class="w-full py-2 px-4 rounded-xl bg-zinc-800 flex items-center gap-4 mb-2"
+        class="w-full py-2 px-4 rounded-xl bg-zinc-200 dark:bg-zinc-800 flex items-center gap-4 mb-2"
       >
         <i class="bi bi-search"></i>
-        <span class="text-zinc-400">Cari</span>
+        <span class="text-zinc-600 dark:text-zinc-400">Cari</span>
       </div>
     </div>
 
@@ -50,9 +50,11 @@ const closeVideo = () => {
     <div v-if="props.isPreview" class="w-full grid grid-cols-1 gap-1 mt-1">
       <div
         v-gsap.once.slower.from="{ opacity: 0, scale: 0 }"
-        class="w-full aspect-video flex justify-center items-center bg-zinc-800 cursor-pointer hover:bg-zinc-700 transition-colors"
+        class="w-full aspect-video flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 cursor-pointer hover:bg-zinc-700 transition-colors"
       >
-        <i class="bi bi-play-circle text-5xl text-zinc-400"></i>
+        <i
+          class="bi bi-play-circle text-5xl text-zinc-600 dark:text-zinc-400"
+        ></i>
       </div>
     </div>
     <div
@@ -64,7 +66,7 @@ const closeVideo = () => {
         :key="video.id"
         v-gsap.once.slower.from="{ opacity: 0, scale: 0 }"
         @click="openVideo(video.video_url)"
-        class="w-full aspect-video flex justify-center items-center bg-zinc-800 cursor-pointer hover:bg-zinc-700 transition-colors relative overflow-hidden group"
+        class="w-full aspect-video flex justify-center items-center bg-zinc-200 dark:bg-zinc-800 cursor-pointer hover:bg-zinc-700 transition-colors relative overflow-hidden group"
       >
         <!-- Video sebagai thumbnail -->
         <video

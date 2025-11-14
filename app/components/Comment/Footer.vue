@@ -90,7 +90,7 @@ const submitMessage = async () => {
   try {
     isLoading.value = true;
 
-    console.log(formData)
+    console.log(formData);
 
     const response = await sendMessage(formData);
 
@@ -142,7 +142,7 @@ const isOverLimit = computed(() => remainingChars.value < 0);
 
 <template>
   <div
-    class="absolute left-0 bottom-3 w-full min-h-14 p-2 rounded-[1.7rem] bg-zinc-700 flex justify-center items-center z-15"
+    class="absolute left-0 bottom-3 w-full min-h-14 p-2 rounded-[1.7rem] bg-zinc-200 dark:bg-zinc-800 flex justify-center items-center z-15"
   >
     <!-- Success notification -->
     <Transition

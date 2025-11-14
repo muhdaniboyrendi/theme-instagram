@@ -11,7 +11,7 @@ const likeClicked = () => {
 
 <template>
   <div
-    class="w-full h-[calc(100dvh-4.5rem)] bg-cover bg-center flex flex-wrap content-between"
+    class="w-full h-[calc(100dvh-4.5rem)] bg-cover bg-center flex flex-wrap content-between text-white"
     :style="{ backgroundImage: `url(${props.image})` }"
   >
     <div

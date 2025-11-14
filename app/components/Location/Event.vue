@@ -147,14 +147,14 @@ const addToGoogleCalendar = () => {
 <template>
   <div
     v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, scale: 0 }"
-    class="min-w-90 w-full max-w-md snap-center snap-always bg-dark rounded-xl border border-white/30 p-4"
+    class="min-w-90 w-full max-w-md snap-center snap-always bg-off-white dark:bg-dark rounded-xl border border-black/30 darK:border-white/30 p-4"
   >
     <div class="w-full flex justify-between items-center mb-3">
       <div class="flex items-center gap-x-3">
         <div
-          class="w-10 h-10 bg-white rounded-full flex justify-center items-center"
+          class="w-10 h-10 bg-dark dark:bg-white rounded-full flex justify-center items-center"
         >
-          <i class="bi bi-pin-map text-dark text-lg"></i>
+          <i class="bi bi-pin-map text-white dark:text-dark text-lg"></i>
         </div>
         <h4 class="text-sm font-semibold">{{ props.title }}</h4>
       </div>
@@ -171,7 +171,9 @@ const addToGoogleCalendar = () => {
       </button>
     </div>
 
-    <p class="text-white/70 text-sm md:text-base">{{ props.place }}</p>
+    <p class="text-zinc-700 dark:text-zinc-300 text-sm md:text-base">
+      {{ props.place }}
+    </p>
 
     <!-- Map Embed -->
     <iframe
@@ -187,11 +189,13 @@ const addToGoogleCalendar = () => {
       class="w-full h-60 bg-zinc-800 rounded-md my-2 flex flex-col justify-center items-center gap-4"
     >
       <i class="bi bi-geo-alt text-6xl text-zinc-600"></i>
-      <span class="text-zinc-400">Lokasi Acara</span>
+      <span class="text-zinc-700 dark:text-zinc-300">Lokasi Acara</span>
     </div>
 
     <!-- Event Details -->
-    <div class="w-full flex items-center text-white/70 gap-x-5">
+    <div
+      class="w-full flex items-center text-zinc-700 dark:text-zinc-300 gap-x-5"
+    >
       <div class="flex items-center gap-x-1">
         <i class="bi bi-calendar4-event"></i>
         <p class="text-xs md:text-sm">{{ props.date }}</p>

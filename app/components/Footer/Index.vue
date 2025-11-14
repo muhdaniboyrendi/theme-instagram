@@ -18,14 +18,14 @@
           label="EA Invitation developer website"
         />
       </div>
-      <p class="text-sm text-white/70">
+      <p class="text-sm text-zinc-700 dark:text-zinc-300">
         © 2025
         <a
           href="https://eainvitation.com/"
           target="_blank"
           title="EA Invitation"
           aria-label="EA Invitation"
-          class="font-medium text-white hover:text-fourth transition"
+          class="font-medium text-dark dark:text-white hover:text-fourth transition"
           >EA Invitation</a
         >. All Rights Reserved.
       </p>

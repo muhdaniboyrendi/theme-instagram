@@ -14,7 +14,7 @@ const props = defineProps({
     <LazySubHeader icon="bi-gift" title="kirim_hadiah" />
     <div
       v-if="props.isPreview"
-      class="w-full bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
+      class="w-full bg-zinc-200 dark:bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
     >
       <LazyGiftCard
         v-for="(n, index) in 2"
@@ -26,7 +26,7 @@ const props = defineProps({
     </div>
     <div
       v-else
-      class="w-full bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
+      class="w-full bg-zinc-200 dark:bg-zinc-800/70 p-5 flex lg:justify-center gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth"
     >
       <GiftCard
         v-for="gift in props.invitationData.gifts"

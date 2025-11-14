@@ -35,12 +35,14 @@ const guestName = computed(() => {
 <template>
   <div class="min-h-dvh bg-cover bg-center" :style="backgroundStyle">
     <div
-      class="min-h-dvh py-10 flex flex-wrap justify-center content-around bg-dark/85 backdrop-blur-md"
+      class="min-h-dvh py-10 flex flex-wrap justify-center content-around bg-off-white/80 dark:bg-dark/80 backdrop-blur-md"
     >
       <!-- Header and Title -->
       <div class="w-full">
         <h1 class="text-center flex flex-col gap-6">
-          <span v-gsap.animateText class="text-slate-300">The Wedding of</span>
+          <span v-gsap.animateText class="text-slate-700 dark:text-slate-300"
+            >The Wedding of</span
+          >
           <span
             v-if="props.isPreview"
             v-gsap.animateText.delay-700.slow
@@ -67,7 +69,7 @@ const guestName = computed(() => {
           class="h-50 w-50 aspect-square mx-auto rounded-[3rem] bg-linear-to-br/oklch from-primary via-secondary to-tertiary flex justify-center items-center"
         >
           <div
-            class="h-47 w-47 aspect-square rounded-[2.8rem] bg-dark flex justify-center items-center"
+            class="h-47 w-47 aspect-square rounded-[2.8rem] bg-off-white dark:bg-dark flex justify-center items-center"
           >
             <NuxtImg
               v-if="props.isPreview"
@@ -92,7 +94,9 @@ const guestName = computed(() => {
       <!-- Guest and Button -->
       <div class="w-full flex flex-col justify-center items-center gap-6">
         <div class="text-center">
-          <span v-gsap.animateText.delay-2000 class="text-slate-300 text-xs"
+          <span
+            v-gsap.animateText.delay-2000
+            class="text-slate-700 dark:text-slate-300 text-xs"
             >guest</span
           >
           <div
@@ -115,7 +119,7 @@ const guestName = computed(() => {
           <button
             @click="openInvitation"
             type="button"
-            class="py-3 px-6 rounded-xl bg-zinc-800 text-white text-sm hover:bg-zinc-700 active:scale-90 transition duration-300 cursor-pointer"
+            class="py-3 px-6 rounded-xl bg-zinc-200 dark:bg-zinc-800 font-medium text-black dark:text-white text-sm hover:bg-zinc-700 active:scale-90 transition duration-300 cursor-pointer"
           >
             Buka Undangan
           </button>

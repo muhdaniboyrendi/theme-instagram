@@ -85,7 +85,7 @@ const contentMaxHeight = computed(() => {
     >
       <!-- Header -->
       <div
-        class="w-full absolute z-10 py-2 px-3 flex justify-between items-center bg-dark border-b border-white/20"
+        class="w-full absolute z-10 py-2 px-3 flex justify-between items-center bg-off-white dark:bg-dark border-b border-dark/20 dark:border-white/20"
       >
         <div
           v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, x: -30 }"
@@ -97,7 +97,7 @@ const contentMaxHeight = computed(() => {
             width="50"
             quality="50"
             loading="lazy"
-            class="w-10 h-10 rounded-full border border-zinc-800"
+            class="w-10 h-10 rounded-full border border-zinc-200 dark:border-zinc-800"
           />
           <NuxtImg
             v-else
@@ -105,7 +105,7 @@ const contentMaxHeight = computed(() => {
             width="50"
             quality="50"
             loading="lazy"
-            class="w-10 h-10 rounded-full border border-zinc-800"
+            class="w-10 h-10 rounded-full border border-zinc-200 dark:border-zinc-800"
           />
           <div>
             <p
@@ -118,7 +118,9 @@ const contentMaxHeight = computed(() => {
               {{ props.invitationData.groom_name }} &
               {{ props.invitationData.bride_name }}
             </p>
-            <p class="text-xs md:text-sm text-white/70">Ucapan & Doa</p>
+            <p class="text-xs md:text-sm text-zinc-700 dark:text-zinc-300">
+              Ucapan & Doa
+            </p>
           </div>
         </div>
         <div
@@ -155,8 +157,12 @@ const contentMaxHeight = computed(() => {
           v-if="props.invitationData.comments.length === 0"
           class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-center px-4"
         >
-          <p class="text-white/70 text-xl mb-3">Belum ada Ucapan</p>
-          <p class="text-white/50">Jadilah yang pertama memberikan Ucapan</p>
+          <p class="text-zinc-700 dark:text-zinc-300 text-xl mb-3">
+            Belum ada Ucapan
+          </p>
+          <p class="text-zinc-600 dark:text-zinc-400">
+            Jadilah yang pertama memberikan Ucapan
+          </p>
         </div>
 
         <!-- Comments List -->

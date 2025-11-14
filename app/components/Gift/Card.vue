@@ -54,14 +54,14 @@ const formattedNumber = computed(() => formatAccountNumber(props.number));
 <template>
   <div
     v-gsap.whenVisible.once.slower-20.from="{ opacity: 0, scale: 0 }"
-    class="min-w-90 w-full max-w-sm snap-center bg-dark rounded-xl border border-white/30 p-4"
+    class="min-w-90 w-full max-w-sm snap-center bg-off-white dark:bg-dark rounded-xl border border-black/30 dark:border-white/30 p-4"
   >
     <div class="w-full flex justify-between items-center mb-3">
       <div class="flex items-center gap-x-3">
         <div
-          class="w-10 h-10 bg-white rounded-full flex justify-center items-center"
+          class="w-10 h-10 bg-dark dark:bg-white rounded-full flex justify-center items-center"
         >
-          <i class="bi bi-credit-card text-dark text-lg"></i>
+          <i class="bi bi-credit-card text-white dark:text-dark text-lg"></i>
         </div>
         <h4 class="text-sm font-semibold">{{ props.bank }}</h4>
       </div>
@@ -69,12 +69,12 @@ const formattedNumber = computed(() => formatAccountNumber(props.number));
     </div>
 
     <p
-      class="text-white/90 text-lg md:text-xl font-secondary font-medium tracking-wider"
+      class="text-zinc-800 dark:text-zinc-200 text-lg md:text-xl font-secondary font-medium tracking-wider"
     >
       {{ formattedNumber }}
     </p>
 
-    <p class="text-white/80 text-sm md:text-base mb-2">{{ props.name }}</p>
+    <p class="text-zinc-700 dark:text-zinc-300 text-sm md:text-base mb-2">{{ props.name }}</p>
 
     <div class="flex items-center gap-2">
       <button
@@ -83,7 +83,7 @@ const formattedNumber = computed(() => formatAccountNumber(props.number));
           'flex items-center gap-2 px-3 py-1 rounded-md transition-all duration-200',
           isCopied
             ? 'text-green-400 bg-green-400/10'
-            : 'text-white/70 hover:text-white hover:bg-white/10',
+            : 'text-zinc-700 dark:text-zinc-300 hover:text-white hover:bg-white/10',
         ]"
         class="text-sm"
       >

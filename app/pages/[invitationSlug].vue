@@ -43,6 +43,40 @@ const shouldShowNavbar = computed(() => {
   return showNavbar.value;
 });
 
+// Computed properties untuk SEO
+const seoTitle = computed(() => {
+  if (isPreview.value) {
+    return "EA Invitation - Platform Undangan Pernikahan Digital";
+  }
+
+  if (invitationData.value?.groom_name && invitationData.value?.bride_name) {
+    return `EA Invitation - The Wedding of ${invitationData.value.groom_name} & ${invitationData.value.bride_name}`;
+  }
+
+  return "EA Invitation - Platform Undangan Pernikahan Digital";
+});
+
+const seoDescription = computed(() => {
+  if (isPreview.value) {
+    return "Wujudkan momen bahagia pernikahan Anda dengan undangan digital yang modern, elegan, dan interaktif.";
+  }
+
+  if (invitationData.value?.groom_name && invitationData.value?.bride_name) {
+    return `Undangan pernikahan ${invitationData.value.groom_name} & ${invitationData.value.bride_name}. Kami mengundang Anda untuk berbagi kebahagiaan di hari istimewa kami.`;
+  }
+
+  return "Wujudkan momen bahagia pernikahan Anda dengan undangan digital yang modern, elegan, dan interaktif.";
+});
+
+const seoImage = computed(() => {
+  // Prioritaskan gambar dari invitation data jika ada
+  if (invitationData.value?.main_info?.cover_image_url) {
+    return invitationData.value.main_info.cover_image_url;
+  }
+
+  return "/og-image.png";
+});
+
 const requestFullscreen = () => {
   if (!process.client) return;
 
@@ -137,7 +171,6 @@ const handleNavigate = (path) => {
 const loadInvitationData = async () => {
   try {
     const response = await fetchInvitationData(invitationSlug);
-
     invitationData.value = response;
   } catch (error) {
     console.error("Error loading invitation data:", error);
@@ -188,6 +221,23 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
+// SEO - Menggunakan watchEffect untuk update dinamis
+watchEffect(() => {
+  useSeoMeta({
+    title: seoTitle.value,
+    description: seoDescription.value,
+    ogTitle: seoTitle.value,
+    ogDescription: seoDescription.value,
+    ogImage: seoImage.value,
+    ogUrl: typeof window !== "undefined" ? window.location.href : "/",
+    ogType: "website",
+    twitterCard: "summary_large_image",
+    twitterTitle: seoTitle.value,
+    twitterDescription: seoDescription.value,
+    twitterImage: seoImage.value,
+  });
+});
 </script>
 
 <template>
@@ -216,7 +266,7 @@ onUnmounted(() => {
     >
       <!-- Floating Button -->
       <div
-        class="rounded-l-2xl p-2 pr-1 fixed right-0 bottom-1/2 translate-y-1/2 z-20 border border-zinc-700/70 bg-zinc-800/50 backdrop-blur-md flex flex-col gap-2"
+        class="rounded-l-2xl p-2 pr-1 fixed right-0 bottom-1/2 z-20 border border-zinc-300/70 dark:border-zinc-700/70 bg-zinc-200/50 dark:bg-zinc-800/50 backdrop-blur-md flex flex-col gap-2"
       >
         <!-- Fullscreen Toggle Button -->
         <FullScreenButton

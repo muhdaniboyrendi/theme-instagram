@@ -27,7 +27,7 @@ const handleNavigate = (path) => {
     <Transition name="slide-up">
       <nav
         v-show="show"
-        class="w-full bg-dark/80 backdrop-blur-xl text-white text-center fixed bottom-0 z-20 border-t border-zinc-800"
+        class="w-full bg-off-white/80 dark:bg-dark/80 backdrop-blur-xl text-dark dark:text-white text-center fixed bottom-0 z-20 border-t border-zinc-200 dark:border-zinc-800"
       >
         <div class="max-w-4xl mx-auto">
           <div
@@ -75,7 +75,7 @@ const handleNavigate = (path) => {
                   width="50"
                   quality="50"
                   loading="lazy"
-                  class="h-8 w-8 aspect-square rounded-full border border-slate-700 overflow-hidden"
+                  class="h-8 w-8 aspect-square rounded-full border border-zinc-200 dark:border-zinc-800 overflow-hidden"
                 />
                 <NuxtImg
                   v-else
@@ -83,7 +83,7 @@ const handleNavigate = (path) => {
                   width="50"
                   quality="50"
                   loading="lazy"
-                  class="h-8 w-8 aspect-square rounded-full border border-slate-700 overflow-hidden"
+                  class="h-8 w-8 aspect-square rounded-full border border-zinc-200 dark:border-zinc-800 overflow-hidden"
                 />
               </button>
             </div>
