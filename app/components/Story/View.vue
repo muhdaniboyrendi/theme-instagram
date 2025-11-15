@@ -12,7 +12,7 @@ const likeClicked = () => {
 <template>
   <div
     class="w-full h-[calc(100dvh-4.5rem)] bg-cover bg-center flex flex-wrap content-between text-white"
-    :style="{ backgroundImage: `url(${props.image})` }"
+    :style="{ backgroundImage: `url(${props.image  || '/placeholder.webp'})` }"
   >
     <div
       class="w-full flex justify-between items-center p-5 bg-linear-to-b/oklch from-dark to-transparent"

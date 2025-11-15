@@ -36,17 +36,18 @@ const props = defineProps(["invitationData"]);
           class="h-50 w-50 aspect-square mx-auto rounded-[3rem] bg-linear-to-br/oklch from-primary via-secondary to-tertiary flex justify-center items-center"
         >
           <div
-            class="h-45 w-45 aspect-square rounded-[2.5rem] bg-dark flex justify-center items-center"
+            class="h-47 w-47 aspect-square rounded-[2.8rem] bg-off-white dark:bg-dark flex justify-center items-center"
           >
-            <div class="h-40 w-40 aspect-square rounded-4xl overflow-hidden">
-              <NuxtImg
-                src="/placeholder.jpg"
-                width="200"
-                quality="50"
-                loading="lazy"
-                class="object-cover object-center"
-              />
-            </div>
+            <NuxtImg
+              :src="
+                props.invitationData.main_info.main_photo_url ||
+                '/placeholder.webp'
+              "
+              width="100"
+              quality="50"
+              loading="lazy"
+              class="h-45 w-45 aspect-square rounded-[2.5rem] object-cover object-center"
+            />
           </div>
         </div>
       </div>
@@ -58,9 +59,7 @@ const props = defineProps(["invitationData"]);
           <span v-gsap.animateText.delay-2000 class="text-slate-300 text-xs"
             >guest</span
           >
-          <div
-            class="flex items-center justify-center gap-2 text-red-600"
-          >
+          <div class="flex items-center justify-center gap-2 text-red-600">
             <p
               v-gsap.animateText.delay-2500.slow
               class="text-lg w-fit font-bold"

@@ -85,7 +85,7 @@ const backgroundStyle = computed(() => ({
           />
           <NuxtImg
             v-else
-            :src="props.invitationData.main_info?.main_photo_url"
+            :src="props.invitationData.main_info?.main_photo_url || '/placeholder.webp'"
             width="50"
             loading="lazy"
             quality="30"

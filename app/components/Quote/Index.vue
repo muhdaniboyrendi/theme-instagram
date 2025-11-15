@@ -36,7 +36,7 @@ const likeClicked = () => {
       />
       <NuxtImg
         v-else
-        :src="props.invitationData.main_info?.main_photo_url"
+        :src="props.invitationData.main_info?.main_photo_url || '/placeholder.webp'"
         alt="Couple photo"
         width="800"
         quality="80"
